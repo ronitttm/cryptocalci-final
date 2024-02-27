@@ -1,0 +1,253 @@
+{% extends "base.html" %}
+{% block title %}Experiment1{% endblock title %}
+{% block body %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" type="text/css" href='..\static\css\crypto.css'>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../static/css/aos.css">
+  <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+
+  <style>
+    body {
+      background-image: url('../static/images/bg.jpg');
+      /* Replace 'your-image-url.jpg' with your image file path */
+      background-size: cover;
+      /* This ensures the image covers the entire background */
+      background-repeat: no-repeat;
+      /* Prevents the image from repeating */
+      background-attachment: fixed;
+      color: white;
+      /* Fixes the background while scrolling */
+    }
+
+    .container {
+      background-color: #393636;
+      opacity: 10;
+      /* Set the background color you want */
+    }
+
+    .page {
+      background-color: rgba(0, 0, 0, 0.8);
+      /* Replace 0.5 with the desired opacity (0 to 1) */
+
+      /* styles.css */
+      .upload-button {
+        background-color: #3498db;
+        /* Set the background color */
+        color: #fff;
+        /* Set the text color */
+        padding: 10px 20px;
+        /* Add padding for spacing */
+        border: none;
+        /* Remove the button border */
+        border-radius: 5px;
+        /* Add rounded corners */
+        cursor: pointer;
+        /* Change cursor on hover to indicate interactivity */
+        transition: background-color 0.3s;
+        /* Add a smooth background color transition */
+
+        /* Add a hover effect */
+        &:hover {
+          background-color: #2e86c1;
+          /* Change background color on hover */
+        }
+      }
+
+    }
+    /* Add this CSS in your styles.css file or within a <style> tag in your HTML */
+      label[for^="id_code"], label[for^="id_image"] {
+          color: teal; /* Set the text color to teal blue */
+          font-weight: bold; /* Make the text bold */
+          vertical-align: top;
+          
+      }
+      
+      
+  </style>
+
+</head>
+
+<body>
+  <!-- HERO -->
+  <section class="page col-lg-7 mx-auto col-md-10 col-12 ">
+    <!-- BLOG DETAIL -->
+    <section class="project-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-9 mx-auto col-md-10 col-12 mt-lg-5 text-center" data-aos="fade-up">
+            <h1 class="blog-category text-info white-text">CryptoCalci: Virtual Labs</h1>
+            <h4>Experiment 1</h4>
+            <h2>Aim : </h2>
+            <h4>Write a program to implement Additive Ciphering<br> method using Java/Python.</h4>
+
+            <div class="client-info">
+              <div class="d-flex justify-content-center align-items-center mt-3">
+                <img src="../static/images/flask.jpg" class="avatar-md img-thumbnail rounded-circle" alt="male avatar">
+              </div>
+            </div>
+            <div><br><br></div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+    <!-- <div class="full-image text-center" data-aos="zoom-in">
+       <img src="images/blog/blog-header-image.jpg" class="img-fluid" alt="blog header">
+     </div> -->
+
+
+    <!-- BLOG DETAIL -->
+    <section class="project-detail">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+
+            <h2 class="blog-category text-info">Resources / Apparatus Required</h2>
+            <h4><strong>Hardware:</strong> Basic Desktop with Windows or Linux <br> <strong>Software:</strong> Python
+            </h4>
+
+            <h2 class="blog-category text-info">Objective</h2>
+            <h4>To understand Encryption Decryption using Additive ciphering method.</h4>
+          </div>
+        </div>
+      </div>
+    </section>
+    <br>
+
+
+    <section class="project-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+
+            <h2 class="blog-category text-info">Theory</h2>
+            <h3>A. Caeser Method</h3>
+            <h3>
+              <strong>Definition:</strong><br> It is a substitution cipher in which the alphabet in the plain text is
+              shifted by a fixed number down the alphabet. The value of key is 3.<br>
+              <strong>Formula:</strong><br>
+              k = Key<br>
+              To encrypt - (p+k) mod 26, Where p=plain text <br>
+              To decrypt - (c-k) mod 26, Where c=Cipher text <br>
+              <strong>Advantages:</strong><br> 1. Easy to encrypt a plain text <br>
+              2. Short key<br>
+              3. No complexity<br>
+              <strong>Disadvantages:</strong><br> 1. Minimum Security<br>
+              2. Key value is fixed<br>
+            </h3>
+            <br><br>
+
+            <h3>B. Additive Method</h3>
+            <h3>
+              <strong>Definition:</strong><br> It is a substitution cipher in which the alphabet in the plain text is
+              shifted by a fixed number down the alphabet. The key is variable in this method.<br>
+              <strong>Formula:</strong><br>
+              k = Key<br>
+              To encrypt - (p+k) mod 26, Where p=plain text <br>
+              To decrypt - (c-k) mod 26, Where c=Cipher text <br>
+              <strong>Advantages:</strong><br> 1. Easy to encrypt a plain text <br>
+              2. Variable key<br>
+              3. Better Secirity<br>
+              <strong>Disadvantages:</strong><br> 1. Minimum Security<br>
+              2. Single Alphabet Replacement<br>
+            </h3>
+          </div>
+        </div>
+        <br>
+      </div>
+    </section><br>
+
+
+
+    <section class="project-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+            <!-- Video -->
+            <div class="iframe-container" style="display:flex; justify-content: center;align-items: center;">
+              <iframe width="920" height="520" src="https://www.youtube.com/embed/RjbVxOpFFBU?si=C-qn8k-XFHsJcvLo"
+                title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><br>
+
+    <!-- Compiler -->
+    <div class="col-lg-30 mx-auto mb-5 pb-5 col-12" data-aos="fade-up">
+      <h3 class="blog-category text-info my-3 justify-content" data-aos="fade-up">Code Your Algorithm</h3>
+      <section>
+        <iframe src="https://trinket.io/embed/python/fde2f7575a" width="100%" height="600" frameborder="0"
+          marginwidth="0" marginheight="0" allowfullscreen></iframe>
+      </section>
+    </div>
+
+    <section class="project-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+            <h2 class="blog-category text-info">Conclusion</h2>
+            <h4>In this experiment, we learned how to encrypt plain text and decrypt the cypher text using
+              additive and caesar methods.</h4><br>
+          </div>
+        </div>
+      </div>
+    </section><br>
+
+    <section class="project-detail">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+            <h2 class="blog-category text-info">Generate your Experiment PDF</h2>
+            <h4>Upload the Code and Output Screenshot first, then click on the generate button</h4><br>
+            <br><br>
+            <form method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              {{ code_form.as_p }}
+              {{ image_form.as_p }}
+              <input type="submit" value="Upload" class="upload-button" id="upload-button">
+              <a class="upload-button" href="{% url 'generate1' %}">Generate Output</a>
+            </form>
+          
+          </div>
+          
+        </div>
+      </div>
+      
+    </section><br>
+    <br><br>
+    </div>
+  </section>
+
+
+
+  <!-- SCRIPTS -->
+  <script src="../static/js/jquery.min.js"></script>
+  <script src="../static/js/bootstrap.min.js"></script>
+  <script src="../static/js/aos.js"></script>
+  <script src="../static/js/owl.carousel.min.js"></script>
+  <script src="../static/js/smoothscroll.js"></script>
+  <script src="../static/js/custom.js"></script>
+
+
+</body>
+
+</html>
+{% endblock body %}

@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+{% block title %} Home {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>CryptoCalci</title>
+	<link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+	<link rel="stylesheet" href="..\static\css\style.css">
+	{% comment %}
+	<link rel="stylesheet" type="text/css" href="../static/css/slide.css"> {% endcomment %}
+	<link rel="stylesheet" type="text/css"
+		href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+	<header class="showcase" style="background-image: url('../static/images/bg.jpg')">
+		<div class="showcase-top">
+			<img src="../static/images/crypt/2.png" ,align="Center" />
+		</div>
+		<div class="showcase-content">
+
+			<h1>Welcome To CRYPTOCALCI</h1>
+			<p>DIVE RIGHT INTO THE WORLD OF CRYPTOGRAPHY</p>
+			<div class="d-flex justify-content-between">
+				<a href="https://cryptocalci-rrdy.web.app/route/main1.html" class="btn btn-xl get-started-btn">Algorithms <i
+					class="fas fa-chevron-right btn-icon"></i></a>
+				{% if user.is_authenticated %}
+				<a href="{% url 'exp_list' %}" class="btn btn-xl get-started-btn">Virtual Lab <i
+						class="fas fa-chevron-right btn-icon"></i></a>
+				{% else %}
+				<a href="{% url 'signin' %}" class="btn btn-xl get-started-btn">Virtual Lab <i
+						class="fas fa-chevron-right btn-icon"></i></a>
+				{% endif %}
+			</div>
+			
+		</div>
+
+	</header>
+	<section class="tabs">
+		<div class="container">
+			<div id="tab-1" class="tab-item tab-border">
+				<img src="../static/images/crypt/news.png" width="50" height="50"></i>
+				<p class="hide-sm">News</p>
+			</div>
+			<div id="tab-2" class="tab-item">
+				<img src="../static/images/crypt/blog.png" width="50" height="50"></i>
+				<p class="hide-sm">Blogs</p>
+			</div>
+			<div id="tab-3" class="tab-item">
+				<img src="../static/images/crypt/yt.png" width="50" height="50"></i>
+				<p class="hide-sm">Videos</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="tab-content">
+		<div class="container">
+			<!-- Tab Content 1 -->
+			<div id="tab-1-content" class="tab-content-item show">
+				<div class="tab-1-content-inner">
+					<div class="work">
+						<a
+							href="https://cio.economictimes.indiatimes.com/news/digital-security/why-new-age-cyber-threats-require-intrinsic-and-ai-powered-security-shields/93789928">
+							<img src="../static/images/crypt/cr.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://thehackernews.com/?m=1">
+							<img src="../static/images/crypt/cr1.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://thehackernews.com/2022/08/hackers-breach-lastpass-developer.html">
+							<img src="../static/images/crypt/cr2.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://cyware.com/cyber-security-news-articles">
+							<img src="../static/images/crypt/cr3.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://ciso.economictimes.indiatimes.com/tag/cryptography">
+							<img src="../static/images/crypt/cr4.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://cio.economictimes.indiatimes.com/tag/cryptography">
+							<img src="../static/images/crypt/cr5.png">
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Tab Content 2 -->
+			<div id="tab-2-content" class="tab-content-item">
+				<div class="tab-2-content-top">
+					<div class="work">
+						<a
+							href="https://www.akamai.com/solutions/security/app-and-api-security?utm_source=google&utm_medium=cpc&utm_campaign=F-MC-52611&utm_term=cyber%20security&utm_content=India&ef_id=CjwKCAjwpKyYBhB7EiwAU2Hn2ZLU8SBTUCI5uG9bZT16idPOqHB_I6ieczJIOJl7EOdeX-QCJ-dWsBoC6m8QAvD_BwE:G:s&s_kwcid=AL!5241!3!595809818608!e!!g!!cyber%20security%20blog!1165727463!137847304522&gclid=CjwKCAjwpKyYBhB7EiwAU2Hn2ZLU8SBTUCI5uG9bZT16idPOqHB_I6ieczJIOJl7EOdeX-QCJ-dWsBoC6m8QAvD_BwE">
+							<img src="../static/images/crypt/cb1.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://blog.feedspot.com/cryptography_blogs/"></a>
+						<!-- <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjo09agyen5AhVHHSsKHVdoDhsYABABGgJzZg&agsac=Snjh8jQJ8Lg&cit=CkUKCQjwpKyYBhCCARI0ADWClTZWw9kObnZyDxpQgrqGCV8nOybXN1ZxywNt5_hVm9wAF-f5yz2jC412UqzbBQ4OfRoC_Ojw_wcB&ei=W2QLY-DKF6uk3LUP4bSZqAM&ohost=www.google.com&cid=CAESbeD2V-e74d-jmkXhXH0006OKGqIYYI2HT7LazHKnMP_y7t4YahxU_cUfnyp7zcQeuT2i8XA6Xq6_v81idyOBr9tsVDQoXYnJ6nlOEEHDbVkKtOjEF1rQDrC3Lvt6N8lTv6bQZ9nMlBY96BvR_IY&sig=AOD64_3kqEa0w5Kjzf6jTztbFi71dcIqcA&q&sqi=2&adurl&ved=2ahUKEwig5M2gyen5AhUrErcAHWFaBjUQ0Qx6BAgEEAE&ms=CoACfTZTdkJPErudPiHgjrUauQMmEWWXBkBPB3002StRgoyW0Qv9FalPMnJDIADp-t3oFu7eEw8XhlMGTsW_QgDIQ0zi39KvmDhg53ScVbCcvMP-LTaEMF2fAVjCOI2RY-FSdR5-zgRsQhRwWymafDwliXIcSF3jziPDQ7qrMm4a6SLA7EsAZl27cskVc4_Ivilj5Xx6u4UxY1tKa1pauUw3fbb4SeCssz14Tdv4mjFAXGyxvR0vZu3U8HKvUZNS-w_j4g_82TagnH7-f_jNsvi-SVAUgKSFiCAHDYdHMVFVS4icxJjz7_arPFd4URYXhzVxoFtb_xX-h0Cz_Ulu-bs_pgqAAvocasx13YOdWAo6HRb3WJj_LXpcz9hrSjDMk6SXOxituhV5lgiE85dK8N7WhyP5YAiXHIOVWTJNXf03ZtIN6vX4dqbCpCgIwX2XomnPiXgC8kLAKVjo6mKNFty1DNPF0KRiNPFVoPFNKqTBb8TvsZ0mL7AnrnWeLtlGIyeyvBNUY1WOiV05cpkmPLKtyfqMBluWb9O5Gjal3GWvKQtbP090KPrukqhlN2fzjyWq8RbrM1Qs444fOc3xy-iEJmlItB9wFtaKaED_TKPM6heAf5ab329Eev7Wp44fnKyQbAzK9sPa4iINMNpIoZ5Ef7Vqg6YKPdra6Os0_PbhODgV3EASEHNPN3QwBGnOD-hIQ1S2fdo"> -->
+						<img src="../static/images/crypt/cb2.png">
+						</a>
+					</div>
+					<div class="work">
+						<!-- <a href="https://www.googleadservices.com/pagead/aclk?sa=L&ai=DChcSEwjo09agyen5AhVHHSsKHVdoDhsYABAAGgJzZg&agsac=tYz8s67VgGM&cit=CkUKCQjwpKyYBhCCARI0ADWClTYf11adD_-6f0FFmMaWW05u6HVEg4POudHMLWJjzifitBkaQ0LCtKWg7bRjnMvoxxoC_DHw_wcB&ei=W2QLY-DKF6uk3LUP4bSZqAM&ohost=www.google.com&cid=CAESbeD2V-e74d-jmkXhXH0006OKGqIYYI2HT7LazHKnMP_y7t4YahxU_cUfnyp7zcQeuT2i8XA6Xq6_v81idyOBr9tsVDQoXYnJ6nlOEEHDbVkKtOjEF1rQDrC3Lvt6N8lTv6bQZ9nMlBY96BvR_IY&sig=AOD64_1Q2zplXh9aNZLoASPEfTh-w7ta1A&q&sqi=2&adurl&ved=2ahUKEwig5M2gyen5AhUrErcAHWFaBjUQ0Qx6BAgDEAE&ms=CoACPBx3a0BgM8-3PRCUjrkvgiohAH71JmEMDHQRiytYtpGz0D6VUqdLSndKNV2j-OiuU8XfUGMztwtvaOXKRArZFQPs_ruCsglSz3u9ItafndewIwP3OVGbbRvFPL3YTvEBUBR-2iRmUxFaXAjudzI1sDE-SHyPyTanapmrMUM3zAbpw1oqJV2eT8Qbc_HvvBgG7V5-sMsYRwcGRm5StGkHTf7xac-KuAwtatT5oFpFSXCRlhkkb8fgslijdY5U0BqygiHYtB6mqRXfXfmSktmOO1Y5gMfkjyQMS6l3QVZZWtr04ri1oNa7LnpUZHQapSB_hVxLk3Paoj31-U1XsZULjgqAAhu1isChlsniCRvFSMg11dah3VIAg-_7KGKKa9MCwfRJ64xSHEZHNHP2-fsN8t66M03z13Gf_iopXahkeCc2S8mYfHhztvCJ7rrU1wxYtgTIcKyoTOjdKtN_HTVVRyQNTZTQ-9QgWBd54mOJw6bdU-97QgwlUHvBfY5Ypp7j4XPvmfWdvZSMAw3cEXPXxQ2zRNi2yRjpjatYmiH-MWz_MEJJSybDz_bWtIrVaLCBz01HOOz3PQ3494ne3_WPQsJgtlTuCZfnvBKpG8r2ryQcByvKU5IdTudSHcy_-CRMCTMDpV6muCSmfmLXjqjs6M9o1DZo-4BXIlPpYUvHwz0kUw8SECvRJtSdK95ULzlxV2LCWv8"> -->
+						<a href="https://blog.feedspot.com/cryptography_blogs/">
+							<img src="../static/images/crypt/cb3.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://blog.feedspot.com/cryptography_blogs/">
+							<img src="../static/images/crypt/cb4.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://www.edureka.co/blog/what-is-cryptography/">
+							<img src="../static/images/crypt/cb5.png">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://www.ecpi.edu/blog/crypotgraphy-and-network-security">
+							<img src="../static/images/crypt/cb6.png">
+						</a>
+					</div>
+				</div>
+			</div>
+
+			<!-- Tab Content 3 -->
+			<div id="tab-3-content" class="tab-content-item">
+				<div class="tab-3-content-bottom">
+					<div class="work">
+						<a href="https://www.youtube.com/watch?v=inWWhr5tnEA">
+							<img src="https://img.youtube.com/vi/inWWhr5tnEA/maxresdefault.jpg">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://www.youtube.com/watch?v=LA3fah6i-4A">
+							<img src="https://img.youtube.com/vi/LA3fah6i-4A/maxresdefault.jpg">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://www.youtube.com/watch?v=0Uo3uo7ZnEQ">
+							<img src="https://img.youtube.com/vi/0Uo3uo7ZnEQ/maxresdefault.jpg">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://www.youtube.com/watch?v=uzGzSHGip_o">
+							<img src="https://img.youtube.com/vi/uzGzSHGip_o/maxresdefault.jpg">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://www.youtube.com/watch?v=sH74nrEefyI">
+							<img src="https://img.youtube.com/vi/sH74nrEefyI/maxresdefault.jpg">
+						</a>
+					</div>
+					<div class="work">
+						<a href="https://www.youtube.com/watch?v=jmtzX-NPFDc">
+							<img src="https://img.youtube.com/vi/jmtzX-NPFDc/maxresdefault.jpg">
+						</a>
+					</div>
+				</div>
+			</div>
+	</section>
+
+	<!-- partial -->
+	<script src="../static/js/script.js"></script>
+
+</body>
+
+</html>
+
+{% endblock body %}

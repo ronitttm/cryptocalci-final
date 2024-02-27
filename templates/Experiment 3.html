@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%; 
+        height: 300px;
+      }
+
+      td, th {
+        border: 2px solid black;
+        padding: 5px;
+      }
+
+      .column1{
+        width: 30%;
+      }
+
+      .column2{
+        width: 70%
+      }
+
+      .space-between-tables {
+            margin-top: 20px;
+        }
+    </style>
+
+  </head>
+
+  <body style="font-family: Calibri; font-size: 18px;">
+    
+    <header>
+        <img src="VIT Logo.png" alt="VIT Logo">
+
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+
+        <span style="font-weight: bold;">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+    </header>
+    
+    <table>
+        <colgroup>
+            <col class="column1">
+            <col class="column2">
+        </colgroup>
+        <tr>
+          <td>Student Name</td>
+          <td>{{user.first_name}} {{user.last_name}}</td>
+        </tr>
+        <tr>
+          <td>Roll Number</td>
+          <td>{{user.username}}</td>
+        </tr>
+        <tr>
+          <td>College Name</td>
+          <td>Vidyalankar Institute of Technology</td>
+        </tr>
+        <tr>
+          <td>Experiment Number</td>
+          <td>03</td>
+        </tr>
+        <tr>
+          <td>Experiment Title</td>
+          <td>Write a Program to Implement Affine Cipher Method using Java/Python</td>
+        </tr>
+        <tr>
+    </table>
+
+    <div class="space-between-tables"></div>
+
+    <table>
+        <colgroup>
+            <col class="column1">
+            <col class="column2">
+        </colgroup>
+        <tr>
+          <td>Aim</td>
+          <td>To Understand Encryption and Decryption using Affine Cipher Method.</td>
+        </tr>
+        <tr>
+          <td>Theory</td>
+          <td>It is a substitution cipher in which the alphabet in the plain text is multiplied by a variable key 1 i.e, multiplicative key and then added with another key 2 , i.e, additive key down the alphabet.<br>
+            Formula used is:<br>
+            Cipher = [(p*k1)+k2] mod 26, where p=plain text, k1=multiplicative key, k2=additive key<br>
+            Pain =  [(p-k2)*k1^-1] mod 26, where p=plain text, K1^-1=multiplicative inverse of k1<br><br>
+            <u>Advantages of the method includes:</u><br>1. It can work with very large keys<br>2. Encrypted key is complex which gives more security<br><br>
+            <u>Disadvantages of the method includes:</u><br>1.Possiblity of decryption by following the algorithm
+        </td>            
+        </tr>
+        <tr>
+          <td>Code</td>
+          <td>
+            {% if latest_code %}
+            <pre>{{ latest_code.code }}</pre>
+            {% else %}
+            <p>No code available</p>
+            {% endif %}
+
+          </td>
+        </tr>
+        <tr>
+          <td>Output</td>
+          <td>
+            {% if latest_image %}
+              <img src="{{ latest_image.image.url }}" alt="Latest User Image">
+            {% else %}
+              <p>No images uploaded yet.</p>
+            {% endif %}
+
+
+          </td>
+        </tr>
+        <tr>
+          <td>Conclusion</td>
+          <td>Learned and implemented how to encrypt a plain text and decrypt the cipher text using Affine cipher method in java/python.</td>
+        </tr>
+    </table>
+  </body>
+</html>

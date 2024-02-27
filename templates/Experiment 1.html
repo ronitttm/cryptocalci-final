@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      height: 300px;
+    }
+
+    td,
+    th {
+      border: 2px solid black;
+      padding: 5px;
+    }
+
+    .column1 {
+      width: 30%;
+    }
+
+    .column2 {
+      width: 70%
+    }
+
+    .space-between-tables {
+      margin-top: 20px;
+    }
+  </style>
+
+</head>
+
+<body style="font-family: Calibri; font-size: 18px;">
+
+  <header>
+    <img src="/static/images/VIT Logo.png" alt="VIT Logo">
+
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+
+    <span style="font-weight: bold; text-align: center;">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+
+  </header>
+  <br>
+  <br>
+
+  <table>
+    <colgroup>
+      <col class="column1">
+      <col class="column2">
+    </colgroup>
+    <tr>
+      <td>Student Name</td>
+      <td>{{ user.first_name}} {{ user.last_name }}</td>
+    </tr>
+    <tr>
+      <td>Roll Number</td>
+      <td>{{user.username}}</td>
+    </tr>
+    <tr>
+      <td>College Name</td>
+      <td>Vidyalankar Institute of Technology</td>
+    </tr>
+    <tr>
+      <td>Experiment Number</td>
+      <td>01</td>
+    </tr>
+    <tr>
+      <td>Experiment Title</td>
+      <td>Write a program to Implement Additive Ciphering Method Using Java/Python.</td>
+    </tr>
+    <tr>
+  </table>
+
+  <div class="space-between-tables"></div>
+
+  <table>
+    <colgroup>
+      <col class="column1">
+      <col class="column2">
+    </colgroup>
+    <tr>
+      <td>Aim</td>
+      <td>To Understand Encryption Decryption using Additive Ciphering Method.</td>
+    </tr>
+    <tr>
+      <td>Theory</td>
+      <td><b>A. CAESAR METHOD</b><br>
+        It is a substitution cipher in which the alphabet in the plain text is shifted by a fixed number down the
+        alphabet.<br>
+        The value of key is 3.<br>
+        Formula used is:<br>
+        Cipher = (p+k) mod 26, where p=plain text, k = key<br>
+        Plain = (c-k) mod 26, where c=Cipher text, k = key<br><br>
+        <u>Advantages of the method includes</u>:<br>1. Easy to encrypt a plain text<br>2. Short key<br>3. No
+        complexity<br><br>
+        <u>Disadvantages of the method includes</u>:<br>1. Minimum Security<br>2. Key value is fixed<br><br><br>
+        <b>B. ADDITIVE METHOD</b><br>
+        It is a substitution cipher in which the alphabet in the plain text is shifted by a fixed number down the
+        alphabet.<br>
+        The key is variable in this method.<br>
+        Formula used is:<br>
+        Cipher = (p+k) mod 26, where p=plain text, k = key<br>
+        Plain = (p-k) mod 26, where p=plain text, k = key<br><br>
+        <u>Advantages of the method includes</u>:<br>1. Easy to encrypt a plain text<br>2. Variable key<br>3. Better
+        security<br><br>
+        <u>Disadvantages of the method includes</u>:<br>1. Minimum Security<br>2. Single alphabet replacement
+      </td>
+    </tr>
+
+    <tr>
+      <td>Code</td>
+      <td>
+        {% if latest_code %}
+          <pre>{{ latest_code.code }}</pre>
+        {% else %}
+          <p>No code available</p>
+        {% endif %}
+
+      </td>
+    </tr>
+
+    <tr>
+
+      <td>Output</td>
+      <td>
+        {% if latest_image %}
+          <img src="{{ latest_image.image.url }}" alt="Latest User Image">
+        {% else %}
+          <p>No images uploaded yet.</p>
+        {% endif %}
+
+      </td>
+    </tr>
+    <tr>
+      <td>Conclusion</td>
+      <td>Learned and implemented how to encrypt a plain text and decrypt the cipher text using Caesar cipher method and
+        Additive cipher method in java/python.</td>
+    </tr>
+  </table>
+
+</body>
+
+</html>

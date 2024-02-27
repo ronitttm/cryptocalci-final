@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 100%; 
+        height: 300px;
+      }
+
+      td, th {
+        border: 2px solid black;
+        padding: 5px;
+      }
+
+      .column1{
+        width: 30%;
+      }
+
+      .column2{
+        width: 70%
+      }
+
+      .space-between-tables {
+            margin-top: 20px;
+        }
+    </style>
+
+  </head>
+
+  <body style="font-family: Calibri; font-size: 18px;">
+    
+    <header>
+        <img src="/static/images/VIT Logo.png" alt="VIT Logo">
+
+        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </span>
+
+        <span style="font-weight: bold;">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+    </header>
+    
+    <table>
+        <colgroup>
+            <col class="column1">
+            <col class="column2">
+        </colgroup>
+        <tr>
+          <td>Student Name</td>
+          <td>{{user.first_name}} {{user.last_name}}</td>
+        </tr>
+        <tr>
+          <td>Roll Number</td>
+          <td>{{user.username}}</td>
+        </tr>
+        <tr>
+          <td>College Name</td>
+          <td>Vidyalankar Institute of Technology</td>
+        </tr>
+        <tr>
+          <td>Experiment Number</td>
+          <td>02</td>
+        </tr>
+        <tr>
+          <td>Experiment Title</td>
+          <td>Write a Program to Implement Multiplicative Cipher Method using Java/Python</td>
+        </tr>
+        <tr>
+    </table>
+
+    <div class="space-between-tables"></div>
+
+    <table>
+        <colgroup>
+            <col class="column1">
+            <col class="column2">
+        </colgroup>
+        <tr>
+          <td>Aim</td>
+          <td>To Understand Encryption and Decryption using Multiplicative Cipher Method.</td>
+        </tr>
+        <tr>
+          <td>Theory</td>
+          <td>A multiplicative cipher is a type of cipher that comes under a monoalphabetic cipher, in which each letter that is present in the plaintext is replaced by a corresponding letter of the ciphertext, according to a fixed multiplication key.<br> 
+          The basic task behind the multiplicative cipher is to use a large prime number as a multiplication key, and then use the modular arithmetic of the integers modulo, the key to encode and decode the plaintext. <br>
+          The encryption process is done by multiplying the numerical value of each letter in the plaintext by the key and then taking the result modulo the key.<br>
+          The decryption process is simply the reverse of the encryption process, i.e., by dividing the numerical value of each letter in the ciphertext by key and then taking the result modulo of the key.
+          <br>Formula used is:<br> Cipher = (P * K) Mod 26 <br>Plain = (Cipher * K^(-1)) Mod 26.<br></td>
+        </tr>
+        <tr>
+          <td>Code</td>
+          <td>
+            {% if latest_code %}
+            <pre>{{ latest_code.code }}</pre>
+            {% else %}
+            <p>No code available</p>
+            {% endif %}</td>
+        </tr>
+        <tr>
+          <td>Output</td>
+          <td>
+            {% if latest_image %}
+              <img src="{{ latest_image.image.url }}" alt="Latest User Image">
+            {% else %}
+              <p>No images uploaded yet.</p>
+            {% endif %}
+
+
+          </td>
+        </tr>
+        <tr>
+          <td>Conclusion</td>
+          <td>Learned and implemented how to encrypt a plain text and decrypt the cipher text using Multiplicative cipher method in java/python.</td>
+        </tr>
+    </table>
+  </body>
+</html>

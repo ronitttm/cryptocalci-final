@@ -1,0 +1,353 @@
+{% extends "base.html" %}
+{% block title %}Experiments{% endblock title %}
+{% block body %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href='..\static\css\crypto.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/aos.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+
+    <style>
+        body {
+          /* background-color: rgb(34, 30, 30); */
+          margin: 0;
+          padding: 0;
+          overflow-x: hidden;
+          background-image: url('../static/images/bg.jpg'); /* Replace 'your-image-url.jpg' with your image file path */
+          background-size: cover; /* This ensures the image covers the entire background */
+          background-repeat: no-repeat; /* Prevents the image from repeating */
+          background-attachment: fixed;
+          color:white; 
+        }
+
+          .card {
+        border: 1px solid #c5447f; /* Replace YourBorderColor with the desired color */
+    }
+        .page {
+        background-color: rgba(0, 0, 0, 0.8); /* Replace 0.5 with the desired opacity (0 to 1) */
+    }
+    .bg-custom {
+    background-color: #c5447f; /* Change this to the desired color */
+  }
+
+
+        
+      </style>
+
+  </head>
+  <body>
+<!-- list -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/5.3.45/css/materialdesignicons.css" integrity="sha256-NAxhqDvtY0l4xn+YVa6WjAcmd94NNfttjNsDmNatFVc=" crossorigin="anonymous" />
+<section class="page col-lg-7 mx-auto col-md-10 col-12 ">
+<section class="section">
+    <div class="container">
+        <div class="justify-content-center row">
+            <div class="col-lg-12">
+                <div class="candidate-list-widgets mb-4">
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="align-items-center row">
+                    <div class="col-lg-8">
+                                <div class="col-lg-6">
+                                    <div class="selection-widget mt-2 mt-lg-0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="candidate-list">
+
+                    <!-- 1 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#">
+                                            <img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment1">EXP1: Ceaser / Additive Cipher using Java / Python</a><br>
+                                            <span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Easy</span>
+                                        </h5>
+                                        <p class="text-muted custom1-color mb-2">Cryptography</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!-- 2 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment2">EXP2: Multiplicative Cipher implement using Java / Python</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Easy</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Cryptography</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 3 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment3">EXP3: Implement Affine Cipher using JAVA / Python</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Intermediate</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Cryptography</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 4 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment4">EXP4: Rail Fence Transposition Cipher</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Intermediate</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Cryptography</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 5 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment5">EXP 5 IITB Virtual lab of DES 2DES 3DES</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Intermediate</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Cryptography</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 6 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment6">EXP6: Study Various Network Reconnaissance tools & Intro to Kali linux</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Hard</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Network</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 7 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment7">EXP7: Phishing attack over LAN</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Hard</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Network</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 8 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment8">EXP8: DoS & DDoS attack</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Intermediate</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Network</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 9 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment9">EXP9: Demonstrate SQL Injection attack using Kali Linux</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Hard</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Network</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+
+                    <!-- 10 -->
+                    <div class="candidate-list-box card mt-4">
+                        <div class="p-4 card-body card-with-background">
+                            <div class="align-items-center row">
+                                <div class="col-auto">
+                                    <div class="candidate-list-images">
+                                        <a href="#"><img src="../static/images/flask.jpg" style="height: 150px; width: 150px;" alt="" class="avatar-md img-thumbnail rounded-circle" /></a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5">
+                                    <div class="candidate-list-content mt-3 mt-lg-0">
+                                        <h5 class="fs-19 mb-0">
+                                            <a class="primary-link custom1-link" href="experiment10">EXP10: Implement Firewall at the input and output of a network.</a><br><span class="badge bg-custom ms-1">Difficulty<i class="mdi mdi-star align-middle"></i>Hard</span>
+                                        </h5>
+                                        <p class="text-muted mb-2">Network</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Danger Warning -->
+                            <!-- <div class="favorite-icon">
+                                <a href="#"><i class="mdi mdi-heart fs-18"></i></a>
+                            </div> -->
+                        </div>
+                    </div>
+        
+
+
+
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mt-4 pt-2 col-lg-12">
+                <nav aria-label="Page navigation example">
+                    <div class="pagination job-pagination mb-0 justify-content-center">
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</section>
+</section>
+    
+    <!-- SCRIPTS -->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/aos.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/smoothscroll.js"></script>
+    <script src="../static/js/custom.js"></script>
+    
+    </body>
+    </html>
+    {% endblock body %}

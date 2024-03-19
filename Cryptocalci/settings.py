@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-c8!_zz)a^5bh*eshc0d##%=m-fwv&*oe-98ki9c#+9mjh(9aug
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cryptocalci-final.vercel.app']
+ALLOWED_HOSTS = ['cryptocalci-final.vercel.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 ]
 
 ROOT_URLCONF = 'Cryptocalci.urls'
@@ -120,6 +122,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATIC_ROOT = 'staticfiles'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

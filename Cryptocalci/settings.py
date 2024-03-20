@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-c8!_zz)a^5bh*eshc0d##%=m-fwv&*oe-98ki9c#+9mjh(9aug
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cryptocalci-final.vercel.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', '.now.sh']
 
 
 # Application definition
@@ -80,8 +80,13 @@ LOGIN_URL = '/signin'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER' : 'postgres',
+        'PASSWORD' : 'yiXIBpJbdsayXHjbFnHyJRjMvNIMQcxg',
+        'HOST' : 'roundhouse.proxy.rlwy.net',
+        'PORT' : '13791',
+
     }
 }
 
@@ -121,7 +126,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = 'staticfiles'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles_build', 'static')
 
 
 # Default primary key field type
@@ -134,7 +139,6 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,"static")
 ]
 
-WKHTMLTOPDF_CMD = 'C:\\VIT IT 2020-2024\\Major Project\\wkhtmltox-0.12.6-1.mxe-cross-win64\\wkhtmltox\\bin\\wkhtmltopdf.exe'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 

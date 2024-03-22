@@ -77,25 +77,24 @@ WSGI_APPLICATION = 'Cryptocalci.wsgi.application'
 LOGIN_URL = '/signin'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "mydatabase",
-    }
-}
-
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'railway',
-#         'USER' : 'postgres',
-#         'PASSWORD' : 'yiXIBpJbdsayXHjbFnHyJRjMvNIMQcxg',
-#         'HOST' : 'roundhouse.proxy.rlwy.net',
-#         'PORT' : '13791',
-
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": "mydatabase",
 #     }
 # }
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'railway',
+        'USER' : 'postgres',
+        'PASSWORD' : 'qEEjgdsYMoAMUdhAUQiDohXSaaDbapQa',
+        'HOST' : 'roundhouse.proxy.rlwy.net',
+        'PORT' : '58449',
+
+    }
+}
 
 #Firebase Config
 FIREBASE_CONFIG = {

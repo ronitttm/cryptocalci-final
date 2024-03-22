@@ -25,6 +25,7 @@ urlpatterns = [
     path('generate_pdf2', views.display_image_and_code2, name='generate2'),
     path('generate_pdf3', views.display_image_and_code3, name='generate3'),
     path('generate_pdf4', views.display_image_and_code4, name='generate4'),
+    #path('generate_pdf5', views.display_image_and_code4, name='generate5')
 
 ]
 

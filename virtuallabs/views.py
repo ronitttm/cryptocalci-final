@@ -176,12 +176,15 @@ def exp2(request):
             # Create a Code instance and link it to the user
             Code.objects.create(user=user, code=code)
 
-            # Attach the session key to the image before saving
-            image = image_form.save(commit=False)
-            image.image_data = request.FILES['image'].read()
-            image.user = user
-            image.session_key = request.session.session_key
-            image.save()
+            image = request.FILES['image']
+            filename = image.name
+            storage.child("images/" + filename).put(image)
+            # Get the download URL of the uploaded image
+            image_url = storage.child("images/" + filename).get_url(None)
+            
+            # Save the image URL into the database
+            uploaded_image = UploadedImage.objects.create(url=image_url)
+            uploaded_image.save()
 
             # Redirect to a success page or perform other actions
             return redirect('exp2')
@@ -205,11 +208,15 @@ def exp3(request):
             
 
             # Attach the session key to the image before saving
-            image = image_form.save(commit=False)
-            image.image_data = request.FILES['image'].read()
-            image.user = user
-            image.session_key = request.session.session_key
-            image.save()
+            image = request.FILES['image']
+            filename = image.name
+            storage.child("images/" + filename).put(image)
+            # Get the download URL of the uploaded image
+            image_url = storage.child("images/" + filename).get_url(None)
+            
+            # Save the image URL into the database
+            uploaded_image = UploadedImage.objects.create(url=image_url)
+            uploaded_image.save()
 
             # Redirect to a success page or perform other actions
             return redirect('exp3')
@@ -232,11 +239,15 @@ def exp4(request):
             Code.objects.create(user=user, code=code)
 
             # Attach the session key to the image before saving
-            image = image_form.save(commit=False)
-            image.image_data = request.FILES['image'].read()
-            image.user = user
-            image.session_key = request.session.session_key
-            image.save()
+            image = request.FILES['image']
+            filename = image.name
+            storage.child("images/" + filename).put(image)
+            # Get the download URL of the uploaded image
+            image_url = storage.child("images/" + filename).get_url(None)
+            
+            # Save the image URL into the database
+            uploaded_image = UploadedImage.objects.create(url=image_url)
+            uploaded_image.save()
 
             # Redirect to a success page or perform other actions
             return redirect('exp4')
@@ -247,7 +258,35 @@ def exp4(request):
     
 
 def exp5(request):
-    return render(request,"exp5.html")
+    if request.method == 'POST':
+        code_form = CodeForm(request.POST)
+        image_form = UserImageForm(request.POST, request.FILES)
+
+        if code_form.is_valid() and image_form.is_valid():
+            # Get the currently logged-in user
+            user = request.user
+            code = code_form.cleaned_data['code']
+            
+            # Create a Code instance and link it to the user
+            Code.objects.create(user=user, code=code)
+
+            # Attach the session key to the image before saving
+            image = request.FILES['image']
+            filename = image.name
+            storage.child("images/" + filename).put(image)
+            # Get the download URL of the uploaded image
+            image_url = storage.child("images/" + filename).get_url(None)
+            
+            # Save the image URL into the database
+            uploaded_image = UploadedImage.objects.create(url=image_url)
+            uploaded_image.save()
+
+            # Redirect to a success page or perform other actions
+            return redirect('exp5')
+    else:
+        code_form = CodeForm()
+        image_form = UserImageForm()
+    return render(request, 'exp5.html', {'code_form': code_form, 'image_form': image_form})
 
 def exp6(request):
     return render(request,"exp6.html")

@@ -20,20 +20,64 @@
 
     <style>
       body {
-          background-image: url('../static/images/bg.jpg'); /* Replace 'your-image-url.jpg' with your image file path */
-          background-size: cover; /* This ensures the image covers the entire background */
-          background-repeat: no-repeat; /* Prevents the image from repeating */
-          background-attachment: fixed;
-          color:white; /* Fixes the background while scrolling */}
-
-        .container {
+        background-image: url('../static/images/bg.jpg');
+        /* Replace 'your-image-url.jpg' with your image file path */
+        background-size: cover;
+        /* This ensures the image covers the entire background */
+        background-repeat: no-repeat;
+        /* Prevents the image from repeating */
+        background-attachment: fixed;
+        color: white;
+        /* Fixes the background while scrolling */
+      }
+  
+      .container {
         background-color: #393636;
-        opacity: 10; /* Set the background color you want */
+        opacity: 10;
+        /* Set the background color you want */
+      }
+  
+      .page {
+        background-color: rgba(0, 0, 0, 0.8);
+        /* Replace 0.5 with the desired opacity (0 to 1) */
+  
+        /* styles.css */
+        .upload-button {
+          background-color: #3498db;
+          /* Set the background color */
+          color: #fff;
+          /* Set the text color */
+          padding: 10px 20px;
+          /* Add padding for spacing */
+          border: none;
+          /* Remove the button border */
+          border-radius: 5px;
+          /* Add rounded corners */
+          cursor: pointer;
+          /* Change cursor on hover to indicate interactivity */
+          transition: background-color 0.3s;
+          /* Add a smooth background color transition */
+  
+          /* Add a hover effect */
+          &:hover {
+            background-color: #2e86c1;
+            /* Change background color on hover */
+          }
         }
-        .page {
-        background-color: rgba(0, 0, 0, 0.8); /* Replace 0.5 with the desired opacity (0 to 1) */
-    }
-  </style>
+  
+      }
+  
+      /* Add this CSS in your styles.css file or within a <style> tag in your HTML */
+      label[for^="id_code"],
+      label[for^="id_image"] {
+        color: teal;
+        /* Set the text color to teal blue */
+        font-weight: bold;
+        /* Make the text bold */
+        vertical-align: top;
+  
+      }
+    </style>
   
   </head>
   <body>
@@ -141,13 +185,23 @@
                 <div class="container">
                   <div class="row">
                     <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
-                        <h2 class="blog-category text-info">Conclusion</h2>
-                        <h4>In this experiment, we learned how to encrypt plain text and decrypt the cypher text using 
-                          DES methods.</h4>
-
-                    <br><br>
-                    <button class="btn btn-primary" type="print" style="width: 200px; height: 60px;">Print</button>
-                  </div></div></div></section><br>
+                      <h2 class="blog-category text-info">Generate your Experiment PDF</h2>
+                      <h4>Upload the Code and Output Screenshot first, then click on the generate button</h4><br>
+                      <br><br>
+                      <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ code_form.as_p }}
+                        {{ image_form.as_p }}
+                        <input type="submit" value="Upload" class="upload-button" id="upload-button">
+                        <a class="upload-button" href="{% url 'generate4' %}">Generate Output</a>
+                      </form>
+          
+                    </div>
+          
+                  </div>
+                </div>
+          
+              </section><br>
                 <br><br>            
           </div>    
      </section>

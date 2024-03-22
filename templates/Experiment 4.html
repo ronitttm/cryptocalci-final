@@ -1,126 +1,133 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <style>
-      table {
-        border-collapse: collapse;
-        width: 100%; 
-        height: 300px;
-      }
 
-      td, th {
-        border: 2px solid black;
-        padding: 5px;
-      }
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      height: 300px;
+    }
 
-      .column1{
-        width: 30%;
-      }
+    td,
+    th {
+      border: 2px solid black;
+      padding: 5px;
+    }
 
-      .column2{
-        width: 70%
-      }
+    .column1 {
+      width: 30%;
+    }
 
-      .space-between-tables {
-            margin-top: 20px;
-        }
-    </style>
+    .column2 {
+      width: 70%
+    }
 
-  </head>
+    .space-between-tables {
+      margin-top: 20px;
+    }
+  </style>
 
-  <body style="font-family: Calibri; font-size: 18px;">
-    
-    <header>
-        <img src="VIT Logo.png" alt="VIT Logo">
+</head>
 
-        <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        </span>
+<body style="font-family: Calibri; font-size: 18px;">
 
-        <span style="font-weight: bold;">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
-    </header>
-    
-    <table>
-        <colgroup>
-            <col class="column1">
-            <col class="column2">
-        </colgroup>
-        <tr>
-          <td>Student Name</td>
-          <td>{{user.first_name}} {{user.last_name}}</td>
-        </tr>
-        <tr>
-          <td>Roll Number</td>
-          <td>{{user.username}}</td>
-        </tr>
-        <tr>
-          <td>College Name</td>
-          <td>Vidyalankar Institute of Technology</td>
-        </tr>
-        <tr>
-          <td>Experiment Number</td>
-          <td>04</td>
-        </tr>
-        <tr>
-          <td>Experiment Title</td>
-          <td>Write a Program to Implement Railfence Cipher Method using Java/Python</td>
-        </tr>
-        <tr>
-    </table>
+  <header>
+    <img src="VIT Logo.png" alt="VIT Logo">
 
-    <div class="space-between-tables"></div>
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
 
-    <table>
-        <colgroup>
-            <col class="column1">
-            <col class="column2">
-        </colgroup>
-        <tr>
-          <td>Aim</td>
-          <td>To Understand Encryption and Decryption using Railfence Cipher Method.</td>
-        </tr>
-        <tr>
-          <td>Theory</td>
-          <td>The Rail Fence Cipher, also known as the Zigzag Cipher, is a simple transposition cipher used for encoding and decoding text.<br> 
-            It gets its name from the way it visually resembles a fence made of diagonal rails.<br> 
-            This cipher is a type of transposition cipher where the text is written in a zigzag pattern and then read out in rows.<br>
-            It operates by rearranging the letters of a message rather than substituting them with different characters as in substitution ciphers.<br>
-            The Rail Fence Cipher operates with a key parameter known as the number of "rails" or rows.<br>
-            This key determines the number of rows used to write the message in a zigzag pattern.<br>
-            To encode a message, you start by writing the message in a zigzag pattern along the chosen number of rows.<br> 
-            Each character in the message is placed in a specific row and column of this "rail fence."<br>
-            As you write the message, you move diagonally from one rail to another in a zigzag pattern.<br> 
-            The direction of the diagonal movement alternates between moving down and moving up.<br>
-            To decode the message, you follow a similar process.<br> 
-            You create the rail fence structure with the same number of rows, and then you place the encoded characters into the fence in a zigzag pattern.<br> 
-            After that, you read the characters diagonally to reveal the original message.</td>
-        </tr>
-        <tr>
-          <td>Code</td>
-          <td>
-            {% if latest_code %}
-            <pre>{{ latest_code.code }}</pre>
-            {% else %}
-            <p>No code available</p>
-            {% endif %}
-          </td>
-        </tr>
-        <tr>
-          <td>Output</td>
-          <td>
-            {% if latest_image %}
-              <img src="{{ latest_image.image.url }}" alt="Latest User Image">
-            {% else %}
-              <p>No images uploaded yet.</p>
-            {% endif %}
+    <span style="font-weight: bold;">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+  </header>
 
-          </td>
-        </tr>
-        <tr>
-          <td>Conclusion</td>
-          <td>Learned and implemented how to encrypt a plain text and decrypt the cihper text using Railfence cipher method in python.</td>
-        </tr>
-    </table>
-  </body>
+  <table>
+    <colgroup>
+      <col class="column1">
+      <col class="column2">
+    </colgroup>
+    <tr>
+      <td>Student Name</td>
+      <td>{{user.first_name}} {{user.last_name}}</td>
+    </tr>
+    <tr>
+      <td>Roll Number</td>
+      <td>{{user.username}}</td>
+    </tr>
+    <tr>
+      <td>College Name</td>
+      <td>Vidyalankar Institute of Technology</td>
+    </tr>
+    <tr>
+      <td>Experiment Number</td>
+      <td>04</td>
+    </tr>
+    <tr>
+      <td>Experiment Title</td>
+      <td>Write a Program to Implement Railfence Cipher Method using Java/Python</td>
+    </tr>
+    <tr>
+  </table>
+
+  <div class="space-between-tables"></div>
+
+  <table>
+    <colgroup>
+      <col class="column1">
+      <col class="column2">
+    </colgroup>
+    <tr>
+      <td>Aim</td>
+      <td>To Understand Encryption and Decryption using Railfence Cipher Method.</td>
+    </tr>
+    <tr>
+      <td>Theory</td>
+      <td>The Rail Fence Cipher, also known as the Zigzag Cipher, is a simple transposition cipher used for encoding and
+        decoding text.<br>
+        It gets its name from the way it visually resembles a fence made of diagonal rails.<br>
+        This cipher is a type of transposition cipher where the text is written in a zigzag pattern and then read out in
+        rows.<br>
+        It operates by rearranging the letters of a message rather than substituting them with different characters as
+        in substitution ciphers.<br>
+        The Rail Fence Cipher operates with a key parameter known as the number of "rails" or rows.<br>
+        This key determines the number of rows used to write the message in a zigzag pattern.<br>
+        To encode a message, you start by writing the message in a zigzag pattern along the chosen number of rows.<br>
+        Each character in the message is placed in a specific row and column of this "rail fence."<br>
+        As you write the message, you move diagonally from one rail to another in a zigzag pattern.<br>
+        The direction of the diagonal movement alternates between moving down and moving up.<br>
+        To decode the message, you follow a similar process.<br>
+        You create the rail fence structure with the same number of rows, and then you place the encoded characters into
+        the fence in a zigzag pattern.<br>
+        After that, you read the characters diagonally to reveal the original message.</td>
+    </tr>
+    <tr>
+      <td>Code</td>
+      <td>
+        {% if latest_code %}
+        <pre>{{ latest_code.code }}</pre>
+        {% else %}
+        <p>No code available</p>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Output</td>
+      <td>
+        {% if latest_image %}
+          <img src="{{ latest_image.url }}" alt="Latest Uploaded Image">
+        {% else %}
+        <p>No image uploaded yet.</p>
+          {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Conclusion</td>
+      <td>Learned and implemented how to encrypt a plain text and decrypt the cihper text using Railfence cipher method
+        in python.</td>
+    </tr>
+  </table>
+</body>
+
 </html>

@@ -114,9 +114,9 @@
       <td>Code</td>
       <td>
         {% if latest_code %}
-          <pre>{{ latest_code.code }}</pre>
+        <pre>{{ latest_code.code }}</pre>
         {% else %}
-          <p>No code available</p>
+        <p>No code available</p>
         {% endif %}
 
       </td>
@@ -127,9 +127,9 @@
       <td>Output</td>
       <td>
         {% if latest_image %}
-          <img src="{{ latest_image.image.url }}" alt="Latest User Image">
+          <img src="{{ latest_image.url }}" alt="Latest Uploaded Image">
         {% else %}
-          <p>No images uploaded yet.</p>
+          <p>No image uploaded yet.</p>
         {% endif %}
 
       </td>

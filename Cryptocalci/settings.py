@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+import pyrebase
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-c8!_zz)a^5bh*eshc0d##%=m-fwv&*oe-98ki9c#+9mjh(9aug'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['.vercel.app', 'localhost', '127.0.0.1', '.now.sh']
 
@@ -76,17 +77,36 @@ WSGI_APPLICATION = 'Cryptocalci.wsgi.application'
 LOGIN_URL = '/signin'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER' : 'postgres',
-        'PASSWORD' : 'yiXIBpJbdsayXHjbFnHyJRjMvNIMQcxg',
-        'HOST' : 'roundhouse.proxy.rlwy.net',
-        'PORT' : '13791',
-
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": "mydatabase",
     }
+}
+
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'railway',
+#         'USER' : 'postgres',
+#         'PASSWORD' : 'yiXIBpJbdsayXHjbFnHyJRjMvNIMQcxg',
+#         'HOST' : 'roundhouse.proxy.rlwy.net',
+#         'PORT' : '13791',
+
+#     }
+# }
+
+#Firebase Config
+FIREBASE_CONFIG = {
+    "apiKey": "AIzaSyBXzkjF5tkFtQVhjaKozIWOW5b_4COaMyI",
+    "authDomain": "cryptolabs-be025.firebaseapp.com",
+    "databaseURL": "https://cryptolabs-be025-default-rtdb.firebaseio.com/",
+    "projectId": "cryptolabs-be025",
+    "storageBucket": "cryptolabs-be025.appspot.com",
+    "messagingSenderId": "1088033698603",
+    "appId": "1:1088033698603:web:5bbf2905895800a1bf4b6e",
+    "measurementId": "G-4KNJVRNV3H"
 }
 
 

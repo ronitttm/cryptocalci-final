@@ -18,3 +18,27 @@ class Code(models.Model):
 
     def __str__(self):
         return f"Code by {self.user.username}"
+    
+from django.db import models
+
+# Create your models here.
+class QuesModel(models.Model):
+    question = models.CharField(max_length=200,null=True)
+    op1 = models.CharField(max_length=200,null=True)
+    op2 = models.CharField(max_length=200,null=True)
+    op3 = models.CharField(max_length=200,null=True)
+    op4 = models.CharField(max_length=200,null=True)
+    ans = models.CharField(max_length=200,null=True)
+    
+    def __str__(self):
+        return self.question
+    
+class QuizScore(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    score = models.IntegerField()
+    time_taken = models.IntegerField()  # Time taken to complete the quiz in seconds
+    correct_answers = models.IntegerField()
+    wrong_answers = models.IntegerField()
+    percent_correct = models.FloatField()  # Percentage of correct answers
+    total_questions = models.IntegerField()
+    timestamp = models.DateTimeField(default=timezone.now)

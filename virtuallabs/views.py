@@ -3,11 +3,12 @@ from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import User
-from .forms import UserImageForm , CodeForm
-from .models import Code, UploadedImage
+from .forms import UserImageForm , CodeForm, addQuestionform
+from .models import Code, UploadedImage, QuesModel, QuizScore
 from django.contrib.sessions.models import Session
 from django.conf import settings
 import pyrebase
+from virtuallabs import urls
 
 firebase_config = settings.FIREBASE_CONFIG
 
@@ -71,7 +72,6 @@ def exp_list(request):
     return render(request,"exp_list.html")
 
 def display_image_and_code1(request):
-    # Fetch the latest uploaded image
     user = request.user
     try:
         latest_image = UploadedImage.objects.last()
@@ -84,7 +84,15 @@ def display_image_and_code1(request):
     except Code.DoesNotExist:
         latest_code = None
 
-    return render(request, 'Experiment 1.html', {'latest_image': latest_image, 'latest_code': latest_code, 'user': user})
+    # Fetch quiz scores for the current user
+    try:
+        quiz_scores = QuizScore.objects.filter(user=user).last()
+    except QuizScore.DoesNotExist:
+        quiz_scores = None
+
+    return render(request, 'Experiment 1.html', {'latest_image': latest_image, 'latest_code': latest_code, 'user': user, 'quiz_scores': quiz_scores})
+
+
 
 def display_image_and_code2(request):
     user = request.user
@@ -315,3 +323,60 @@ def exp10(request):
 #         form = UserImageForm()
 #     return render(request, 'upload_image.html', {'form': form})
 
+def addQuestion(request):    
+    if request.user.is_staff:
+        form=addQuestionform()
+        if(request.method=='POST'):
+            form=addQuestionform(request.POST)
+            if(form.is_valid()):
+                form.save()
+                return redirect('addquestion')
+        context={'form':form}
+        return render(request,'addQuestion.html',context)
+    else: 
+        return redirect('home') 
+    
+def quiz1(request):
+    if request.method == 'POST':
+        # Process quiz submission
+        questions = QuesModel.objects.all()
+        score = 0
+        wrong = 0
+        correct = 0
+        total = 0
+        for q in questions:
+            total += 1
+            answer = request.POST.get(str(q.id))
+            if answer:
+                if q.ans == answer:
+                    score += 10
+                    correct += 1
+                else:
+                    wrong += 1
+        
+        # Calculate percent
+        if total != 0:
+            percent = (score / (total * 10)) * 100
+        else:
+            percent = 0
+        
+        # Save quiz score to database
+        quiz_score = QuizScore.objects.create(
+            user=request.user,
+            score=score,
+            time_taken=int(request.POST.get('timer', 0)),
+            correct_answers=correct,
+            wrong_answers=wrong,
+            percent_correct=percent,
+            total_questions=total
+        )
+
+        # Redirect to display_image_and_code1 view
+        return redirect('generate1')
+    else:
+        # Render the quiz page
+        questions = QuesModel.objects.all()
+        context = {
+            'questions': questions
+        }
+        return render(request, 'quiz1.html', context)

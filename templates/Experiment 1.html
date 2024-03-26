@@ -114,9 +114,9 @@
       <td>Code</td>
       <td>
         {% if latest_code %}
-          <pre>{{ latest_code.code }}</pre>
+        <pre>{{ latest_code.code }}</pre>
         {% else %}
-          <p>No code available</p>
+        <p>No code available</p>
         {% endif %}
 
       </td>
@@ -127,9 +127,9 @@
       <td>Output</td>
       <td>
         {% if latest_image %}
-          <img src="{{ latest_image.image.url }}" alt="Latest User Image">
+          <img src="{{ latest_image.url }}" alt="Latest Uploaded Image">
         {% else %}
-          <p>No images uploaded yet.</p>
+          <p>No image uploaded yet.</p>
         {% endif %}
 
       </td>
@@ -139,8 +139,24 @@
       <td>Learned and implemented how to encrypt a plain text and decrypt the cipher text using Caesar cipher method and
         Additive cipher method in java/python.</td>
     </tr>
+    {% if quiz_scores %}
+    <tr>
+      <td> <h5>Score: {{ quiz_scores.score }} </h5> </td>
+      <td>
+        <p>Percentage: {{quiz_scores.percent_correct}}%</p>
+        <p>Time Taken: {{quiz_scores.time_taken}} Seconds</p>
+        <p>Correct answers: {{quiz_scores.correct_answers}}</p>
+        <p>Incorrect answers: {{quiz_scores.wrong_answers}}</p>
+        <p>Total questions: {{quiz_scores.total_questions}}</p>
+      </td>  
+    </tr>
+    {% else %}
+  <p>No quiz scores available.</p>
+  {% endif %}
   </table>
 
 </body>
-
 </html>
+
+
+          

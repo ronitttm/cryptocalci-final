@@ -21,10 +21,13 @@ urlpatterns = [
     path("experiment8", views.exp8, name="exp8"),
     path("experiment9", views.exp9, name="exp9"),
     path("experiment10", views.exp10, name="exp10"), 
+    path("add_question", views.addQuestion, name="addquestion"), 
+    path('quiz_1', views.quiz1, name='quiz1'),
     path('generate_pdf1', views.display_image_and_code1, name='generate1'),
     path('generate_pdf2', views.display_image_and_code2, name='generate2'),
     path('generate_pdf3', views.display_image_and_code3, name='generate3'),
     path('generate_pdf4', views.display_image_and_code4, name='generate4'),
+    #path('generate_pdf5', views.display_image_and_code4, name='generate5')
 
 ]
 

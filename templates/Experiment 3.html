@@ -123,6 +123,20 @@
         java/python.</td>
     </tr>
   </table>
+  {% if quiz_scores %}
+    <tr>
+      <td> <h5>Score: {{ quiz_scores.score }} </h5> </td>
+      <td>
+        <p>Percentage: {{quiz_scores.percent_correct}}%</p>
+        <p>Time Taken: {{quiz_scores.time_taken}} Seconds</p>
+        <p>Correct answers: {{quiz_scores.correct_answers}}</p>
+        <p>Incorrect answers: {{quiz_scores.wrong_answers}}</p>
+        <p>Total questions: {{quiz_scores.total_questions}}</p>
+      </td>  
+    </tr>
+    {% else %}
+      <p>No quiz scores available.</p>
+    {% endif %}
 </body>
 
 </html>

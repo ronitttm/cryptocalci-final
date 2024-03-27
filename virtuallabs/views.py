@@ -107,7 +107,13 @@ def display_image_and_code2(request):
     except Code.DoesNotExist:
         latest_code = None
 
-    return render(request, 'Experiment 2.html', {'latest_image': latest_image, 'latest_code': latest_code, 'user': user})
+    # Fetch quiz scores for the current user
+    try:
+        quiz_scores = QuizScore.objects.filter(user=user).last()
+    except QuizScore.DoesNotExist:
+        quiz_scores = None
+
+    return render(request, 'Experiment 2.html', {'latest_image': latest_image, 'latest_code': latest_code, 'user': user, 'quiz_scores': quiz_scores})
 
 def display_image_and_code3(request):
     user = request.user
@@ -122,7 +128,13 @@ def display_image_and_code3(request):
     except Code.DoesNotExist:
         latest_code = None
 
-    return render(request, 'Experiment 3.html', {'latest_image': latest_image, 'latest_code': latest_code, 'user': user})
+    # Fetch quiz scores for the current user
+    try:
+        quiz_scores = QuizScore.objects.filter(user=user).last()
+    except QuizScore.DoesNotExist:
+        quiz_scores = None
+
+    return render(request, 'Experiment 3.html', {'latest_image': latest_image, 'latest_code': latest_code, 'user': user, 'quiz_scores': quiz_scores})
 
 def display_image_and_code4(request):
     user = request.user
@@ -137,7 +149,13 @@ def display_image_and_code4(request):
     except Code.DoesNotExist:
         latest_code = None
 
-    return render(request, 'Experiment 4.html', {'latest_image': latest_image, 'latest_code': latest_code, 'user': user})
+    # Fetch quiz scores for the current user
+    try:
+        quiz_scores = QuizScore.objects.filter(user=user).last()
+    except QuizScore.DoesNotExist:
+        quiz_scores = None
+
+    return render(request, 'Experiment 4.html', {'latest_image': latest_image, 'latest_code': latest_code, 'user': user, 'quiz_scores': quiz_scores})
 
 
 def exp1(request):
@@ -343,9 +361,8 @@ def quiz1(request):
         score = 0
         wrong = 0
         correct = 0
-        total = 0
+        total = 5
         for q in questions:
-            total += 1
             answer = request.POST.get(str(q.id))
             if answer:
                 if q.ans == answer:
@@ -375,8 +392,96 @@ def quiz1(request):
         return redirect('generate1')
     else:
         # Render the quiz page
-        questions = QuesModel.objects.all()
+        questions = QuesModel.objects.order_by('id')[0:5]
         context = {
             'questions': questions
         }
         return render(request, 'quiz1.html', context)
+    
+def quiz2(request):
+    if request.method == 'POST':
+        # Process quiz submission
+        questions = QuesModel.objects.all()
+        score = 0
+        wrong = 0
+        correct = 0
+        total = 5
+        for q in questions:
+            answer = request.POST.get(str(q.id))
+            if answer:
+                if q.ans == answer:
+                    score += 10
+                    correct += 1
+                else:
+                    wrong += 1
+        
+        # Calculate percent
+        if total != 0:
+            percent = (score / (total * 10)) * 100
+        else:
+            percent = 0
+        
+        # Save quiz score to database
+        quiz_score = QuizScore.objects.create(
+            user=request.user,
+            score=score,
+            time_taken=int(request.POST.get('timer', 0)),
+            correct_answers=correct,
+            wrong_answers=wrong,
+            percent_correct=percent,
+            total_questions=total
+        )
+
+        # Redirect to display_image_and_code1 view
+        return redirect('generate2')
+    else:
+        # Render the quiz page
+        questions = QuesModel.objects.order_by('id')[5:10]  
+        context = {
+            'questions': questions
+        }
+        return render(request, 'quiz2.html', context)
+    
+def quiz3(request):
+    if request.method == 'POST':
+        # Process quiz submission
+        questions = QuesModel.objects.all()
+        score = 0
+        wrong = 0
+        correct = 0
+        total = 5
+        for q in questions:
+            answer = request.POST.get(str(q.id))
+            if answer:
+                if q.ans == answer:
+                    score += 10
+                    correct += 1
+                else:
+                    wrong += 1
+        
+        # Calculate percent
+        if total != 0:
+            percent = (score / (total * 10)) * 100
+        else:
+            percent = 0
+        
+        # Save quiz score to database
+        quiz_score = QuizScore.objects.create(
+            user=request.user,
+            score=score,
+            time_taken=int(request.POST.get('timer', 0)),
+            correct_answers=correct,
+            wrong_answers=wrong,
+            percent_correct=percent,
+            total_questions=total
+        )
+
+        # Redirect to display_image_and_code1 view
+        return redirect('generate3')
+    else:
+        # Render the quiz page
+        questions = QuesModel.objects.order_by('id')[10:15]  
+        context = {
+            'questions': questions
+        }
+        return render(request, 'quiz3.html', context)

@@ -210,10 +210,47 @@
             <form method="post" enctype="multipart/form-data">
               {% csrf_token %}
               {{ code_form.as_p }}
-              {{ image_form.as_p }}
+              
+              <!-- Add file input for image upload -->
+              <div>
+                <label for="id_image">Upload Image:</label>
+                {{ image_form.image }}
+                <!-- Image preview container -->
+                <div id="imagePreviewContainer" style="display: none; position: relative;">
+                  <img id="imagePreview" alt="Preview">
+                  <!-- Cross button -->
+                  <button type="button" id="clearImageButton" style="position: absolute; top: 5px; right: 5px; padding: 5px; background-color: rgba(255, 255, 255, 0.5); border: none;">&times;</button>
+                </div>
+              </div>
+              
               <input type="submit" value="Upload" class="upload-button" id="upload-button">
-              <a class="upload-button" href="{% url 'generate4' %}">Generate Output</a>
+              <a class="upload-button" href="{% url 'quiz4' %}">Generate Output</a>
             </form>
+            <style>
+              /* Style for image preview container */
+              #imagePreviewContainer {
+                width: 120px; /* Set width of the preview container */
+                height: 120px; /* Set height of the preview container */
+                overflow: hidden; /* Hide any overflow */
+              }
+              
+              /* Style for image preview */
+              #imagePreview {
+                width: 100%; /* Set width of the image to 100% of the container */
+                height: auto; /* Automatically adjust height to maintain aspect ratio */
+              }
+              
+              #clearImageButton {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+                padding: 5px;
+                font-weight: bold; /* Make the font bold */
+                background-color: transparent; /* Set background color to transparent */
+                border: none; /* Remove border */
+                cursor: pointer; /* Change cursor to pointer on hover */
+              }
+              </style>
 
           </div>
 

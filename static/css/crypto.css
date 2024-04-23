@@ -24,6 +24,11 @@
     font-style: normal;
 }
 
+.dropdown-item {
+  position: relative;
+  z-index: 100000; /* Ensure a high z-index value to appear above other content */
+}
+
 :root {
   --primary-color:        #057a8d;
   --secondary-color:      #f1c111;

@@ -49,6 +49,14 @@
       <col class="column2">
     </colgroup>
     <tr>
+      <td>Submission Count</td>
+      <td>
+        {% for submission in submissions %}
+        {{ submission.submission_count }}
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
       <td>Student Name</td>
       <td>{{user.first_name}} {{user.last_name}}</td>
     </tr>
@@ -66,7 +74,7 @@
     </tr>
     <tr>
       <td>Experiment Title</td>
-      <td>Write a Program to Implement Multiplicative Cipher Method using Java/Python</td>
+      <td>{{experiment.title}}</td>
     </tr>
     <tr>
   </table>
@@ -80,7 +88,7 @@
     </colgroup>
     <tr>
       <td>Aim</td>
-      <td>To Understand Encryption and Decryption using Multiplicative Cipher Method.</td>
+      <td>{{experiment.aim}}</td>
     </tr>
     <tr>
       <td>Theory</td>
@@ -119,8 +127,7 @@
     </tr>
     <tr>
       <td>Conclusion</td>
-      <td>Learned and implemented how to encrypt a plain text and decrypt the cipher text using Multiplicative cipher
-        method in java/python.</td>
+      <td>L{{experiment.conclusion}}</td>
     </tr>
     {% if quiz_scores %}
     <tr>

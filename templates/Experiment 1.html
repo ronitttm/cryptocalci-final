@@ -52,6 +52,14 @@
       <col class="column2">
     </colgroup>
     <tr>
+      <td>Submission Count</td>
+      <td>
+        {% for submission in submissions %}
+        {{ submission.submission_count }}
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
       <td>Student Name</td>
       <td>{{ user.first_name}} {{ user.last_name }}</td>
     </tr>
@@ -69,7 +77,7 @@
     </tr>
     <tr>
       <td>Experiment Title</td>
-      <td>Write a program to Implement Additive Ciphering Method Using Java/Python.</td>
+      <td>{{experiment.title}}</td>
     </tr>
     <tr>
   </table>
@@ -83,7 +91,7 @@
     </colgroup>
     <tr>
       <td>Aim</td>
-      <td>To Understand Encryption Decryption using Additive Ciphering Method.</td>
+      <td>{{experiment.aim}}</td>
     </tr>
     <tr>
       <td>Theory</td>
@@ -136,8 +144,7 @@
     </tr>
     <tr>
       <td>Conclusion</td>
-      <td>Learned and implemented how to encrypt a plain text and decrypt the cipher text using Caesar cipher method and
-        Additive cipher method in java/python.</td>
+      <td>{{experiment.conclusion}}</td>
     </tr>
     {% if quiz_scores %}
     <tr>
@@ -148,11 +155,13 @@
         <p>Correct answers: {{quiz_scores.correct_answers}}</p>
         <p>Incorrect answers: {{quiz_scores.wrong_answers}}</p>
         <p>Total questions: {{quiz_scores.total_questions}}</p>
-      </td>  
-    </tr>
-    {% else %}
+      </td>
+      {% else %}
       <p>No quiz scores available.</p>
-    {% endif %}
+      {% endif %}  
+    </tr>
+
+  
 
   </table>
 

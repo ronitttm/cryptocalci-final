@@ -53,6 +53,13 @@
             {{ user.username }}
           </a>
           <div class="dropdown-menu" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="{% url 'dashboard' %}">
+              {% if user.is_staff %}
+    Admin Dashboard
+{% elif user.is_authenticated %}
+    User Dashboard
+{% endif %}
+            </a>
             <a class="dropdown-item" href="{% url 'signout' %}">Logout</a>
           </div>
         </div>

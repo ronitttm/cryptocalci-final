@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Vignere Method {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CryptoCalci</title>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+    <link rel="stylesheet" href="{% static 'css/algos.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/aos.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+          rel="stylesheet">
+
+          <style>
+            body {
+                background-image: url('../static/images/bg.jpg');
+                /* Replace 'your-image-url.jpg' with your image file path */
+                background-size: cover;
+                /* This ensures the image covers the entire background */
+                background-repeat: no-repeat;
+                /* Prevents the image from repeating */
+                background-attachment: fixed;
+                color: white;
+                /* Fixes the background while scrolling */
+            }
+        
+            .container {
+                background-color: #393636;
+                opacity: 0.9;
+                padding: 30px;
+                border-radius: 10px;
+            }
+        
+            .card {
+                border: none;
+                border-radius: 10px;
+            }
+        
+            .card h2 {
+                font-size: 28px;
+                /* Increase heading font size */
+                margin-bottom: 20px;
+            }
+        
+            .form-group label {
+                color: teal;
+                font-weight: bold;
+                font-size: 20px;
+                /* Increase label font size */
+            }
+        
+            .form-control {
+                width: 100%;
+                /* Make input fields full width */
+                font-size: 18px;
+                /* Increase input field font size */
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+        
+            .signup {
+                padding: 15px 30px;
+                /* Increase button padding */
+                font-size: 20px;
+                /* Increase button font size */
+                text-transform: uppercase;
+                background-color: #381bbd;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+        
+            .signup:hover {
+                background-color: #4f28d3;
+            }
+        </style>
+</head>
+<body>
+    <header class="showcase">
+        <div class="menu">
+            <div class="title">MENU</div>
+            <ul class="nav">
+              <li><a href="/index.html">Home</a></li>
+              <li><a href="/route/main1.html">Algorithms</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="/route/main2.html">Services</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="showcase-top">
+            <img src="/img/2.png" ,align="Center" />
+        <div id="pricing-table" class="clear">
+            <div class="plan">
+                <h3 style="color:black">Encryption<span>E</span></h3>         
+                <ul>
+                    <li>Enter Plaintext</li>
+					<li><textarea id="userText" placeholder="What is your secret message?"></textarea></li>
+					<li><input id="keyword" type="text" placeholder="keyword"></input></li>
+					<li><button id="encrypt" class="signup" type="submit">Encrypt</button></li>
+                    
+                </ul> 
+                	
+            </div>
+                
+        </div>
+    </header>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+    <script src="{% static 'js/vig.js' %}"></script>
+</body>
+</html>
+{% endblock body %}

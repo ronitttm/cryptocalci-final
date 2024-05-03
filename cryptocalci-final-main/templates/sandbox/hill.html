@@ -1,0 +1,175 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} Caeser Method {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CryptoCalci</title>
+    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+    <link rel="stylesheet" href="{% static 'css/ag_hillc.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/aos.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
+          rel="stylesheet">
+
+          <style>
+            body {
+                background-image: url('../static/images/bg.jpg');
+                /* Replace 'your-image-url.jpg' with your image file path */
+                background-size: cover;
+                /* This ensures the image covers the entire background */
+                background-repeat: no-repeat;
+                /* Prevents the image from repeating */
+                background-attachment: fixed;
+                color: white;
+                /* Fixes the background while scrolling */
+            }
+        
+            .container {
+                background-color: #393636;
+                opacity: 0.9;
+                padding: 30px;
+                border-radius: 10px;
+            }
+        
+            .card {
+                border: none;
+                border-radius: 10px;
+            }
+        
+            .card h2 {
+                font-size: 28px;
+                /* Increase heading font size */
+                margin-bottom: 20px;
+            }
+        
+            .form-group label {
+                color: teal;
+                font-weight: bold;
+                font-size: 20px;
+                /* Increase label font size */
+            }
+        
+            .form-control {
+                width: 100%;
+                /* Make input fields full width */
+                font-size: 18px;
+                /* Increase input field font size */
+                padding: 10px;
+                margin-bottom: 20px;
+            }
+        
+            .signup {
+                padding: 15px 30px;
+                /* Increase button padding */
+                font-size: 20px;
+                /* Increase button font size */
+                text-transform: uppercase;
+                background-color: #381bbd;
+                color: #fff;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: background-color 0.3s;
+            }
+        
+            .signup:hover {
+                background-color: #4f28d3;
+            }
+        </style>
+
+  
+<body>
+    <header class="showcase">
+        <div class="menu">
+            <div class="title">MENU</div>
+            <ul class="nav">
+              <li><a href="/index.html">Home</a></li>
+              <li><a href="/route/main1.html">Algorithms</a></li>
+              <li><a href="#">About</a></li>
+              <li><a href="/route/main2.html">Services</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <div class="showcase-top">
+            <img src="/img/2.png" ,align="Center" />
+        <div id="pricing-table" class="clear">
+            <div class="plan1">
+                <h3 style="color:black">Matrix<span>M</span></h3>	
+                <ul>
+                    <li>Enter Matrix Value</li>
+                    <div id="inSec">
+                        <div id="EDMenu">
+                        <button id="enhButton0" type="button">Encrypt</button>
+                        <button id="dehButton0" type="button">Decrypt</button>
+                      </div>
+                      
+                        <select id="choice">
+                            <option value="m22">2 X 2 Matrix</option>
+                            <option value="m33">3 X 3 Matrix</option>
+                        </select>
+                      
+                        <form id="m22">
+                          <input id="tw0" type="number" name="index" min="0" max="25">
+                          <input id="tw1" type="number" name="index" min="0" max="25"> <br />
+                          <input id="tw2" type="number" name="index" min="0" max="25">
+                          <input id="tw3" type="number" name="index" min="0" max="25">
+                        </form>
+                      
+                      
+                        <form id="m33">
+                          <input id="tr0" type="number" name="index" min="0" max="25">
+                          <input id="tr1" type="number" name="index" min="0" max="25">
+                          <input id="tr2" type="number" name="index" min="0" max="25"><br />
+                          <input id="tr3" type="number" name="index" min="0" max="25">
+                          <input id="tr4" type="number" name="index" min="0" max="25">
+                          <input id="tr5"  type="number" name="index" min="0" max="25"><br />
+                          <input id="tr6" type="number" name="index" min="0" max="25">
+                          <input id="tr7" type="number" name="index" min="0" max="25">
+                          <input id="tr8" type="number" name="index" min="0" max="25">
+                        </form>
+                      
+                        <button id="subButtonH" type="button">Submit</button><br>
+                      
+                      </div>
+                </div>
+            </div>
+            <div id="pricing-table" class="clear">
+                <div class="plan">
+                    <h3 style="color:black">Encryption<span>E</span></h3>         
+                    <ul>
+                        <li>Enter Plaintext</li>	
+                        <li><input id="textP"name="plainM"></input></li>
+                        <li><pre id="encT"></pre></li>
+                        <button id="encButton" type="button">Encrypt</button>
+                </ul>
+                </div>
+                    <div class="plan">
+                    <h3 style="color:black">Decryption<span>D</span></h3>	
+                    <ul>
+                        <li>Enter Ciphertext</li>
+                        <li><textarea id="textC"name="cipherM"></textarea></li>	
+                        <li><pre id="decT"></pre></li>
+                        <button id="decButton" type="button">Decrypt</button>
+                    </ul>
+                    
+                </div> 	 	
+            </div> 	
+        </div>
+
+    </header>
+<script src="{% static "js/ag_hillc_scripts/util.js"%}"></script>
+<script src="{% static "js/ag_hillc_scripts/storage.js"%}"></script>
+<script src="{% static "js/ag_hillc_scripts/encrypt.js"%}"></script>
+<script src="{% static "js/ag_hillc_scripts/decrypt.js"%}"></script>
+<script src="{% static "js/ag_hillc_scripts/index.js"%}"></script>
+</body> 
+</html>
+{% endblock body %}

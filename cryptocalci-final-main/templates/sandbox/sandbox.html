@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %} SandBox {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CryptoCalci</title>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
+  <link rel="stylesheet" href="{% static 'css/sandbox.css' %}">
+  <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+</head>
+<body>
+	<div class="menu">
+		<div class="title">MENU</div>
+		<ul class="nav">
+		  <li><a href="/index.html">Home</a></li>
+		  <li><a href="/route/main1.html">Algorithms</a></li>
+		  <li><a href="#">About</a></li>
+		  <li><a href="/route/main2.html">Services</a></li>
+		  <li><a href="#">Contact</a></li>
+		</ul>
+	</div>
+<!-- partial:index.partial.html -->
+		<section class="tabs">
+			<div class="container">
+				<div id="tab-1" class="tab-item tab-border">
+					<img src="static\images\symic1.png"width="50"height="50"></i>
+					<p class="hide-sm">Symmetric-Stream</p>
+				</div>
+				<div id="tab-4" class="tab-item">
+					<img src="static\images\blocksy.png"width="50"height="50"></i>
+					<p class="hide-sm">Symmetric-Block</p>
+				</div>
+				<div id="tab-2" class="tab-item">
+					<img src="static\images\asymic1.png"width="50"height="50"></i>
+					<p class="hide-sm">Asymmetric</p>
+				</div>
+				<div id="tab-3" class="tab-item">
+					<img src="static\images\hashic1.png"width="50"height="50"></i>
+					<p class="hide-sm">Hashing</p>
+				</div>
+				
+			</div>
+		</section>
+
+		<section class="tab-content">
+			<div class="container">
+				<!-- Tab Content 1 -->
+				<div id="tab-1-content" class="tab-content-item show">
+					<div class="tab-1-content-inner">
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="additive">Additive</a></div>
+							<a href="/route/ag_add.html">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="multiplicative">Multiplicative</a></div>
+							<a href="/route/ag_mul.html">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="affine">Affine</a></div>
+							<a href="/route/ag_affine.html">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="caeser">Caesar</a></div>
+							<a href="/route/ag_caeser.html">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="vignere">Vignere Method</a></div>
+							<a href="/route/ag_vignere.html">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="hill">Hill Method</a></div>
+							<a href="/route/ag_hillc.html">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="playfair">Playfair Method</a></div>
+							<a href="/route/ag_playfair.html">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+				</div>
+				</div>
+				
+				<!-- Tab Content 4 -->
+				<div id="tab-4-content" class="tab-content-item">
+					<div class="tab-4-content-inner">
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="aes">AES</a></div>
+							<a href="aes">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="des">DES</a></div>
+							<a href="des">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center"><a href="rc4">RC-4</a></div>
+							<a href="rc4">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+
+				</div>
+			</div>
+
+				<!-- Tab Content 2 -->
+				<div id="tab-2-content" class="tab-content-item">
+					<div class="tab-2-content-top">
+
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center">RSA</div>
+							<a href="rsa">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center">El-Gamal</div>
+							<a href="elgamal">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Tab Content 3 -->
+				<div id="tab-3-content" class="tab-content-item">
+					<div class="tab-3-content-bottom">
+						<div class="work">
+							<div class="imageContainer">
+								<div class="caption center">SHA-256</div>
+							<a href="sha256">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div>
+						<!-- <div class="work">
+							<div class="imageContainer">
+								<div class="caption center">SHA-256</div>
+							<a href="/route/dummy.html">
+							<img src="static\images\exp_bg.png">
+							</a>
+							</div>
+						</div> -->
+
+				</div>
+			</div>
+		</section>
+
+		<footer class="footer">
+			<p>Questions? Mail cryptocalii@gmail.com</p>
+			<div class="footer-cols">
+				<ul>
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">About Us</a></li>
+					<li><a href="#"></a></li>
+					<!-- <li><a href="#">Corporate Information</a></li>
+					<li><a href="#">Netflix Originals</a></li>
+				</ul>
+				<ul>
+					<li><a href="#">Help Center</a></li>
+					<li><a href="#">Jobs</a></li>
+					<li><a href="#">Terms Of Use</a></li>
+					<li><a href="#">Contact Us</a></li>
+				</ul>
+				<ul>
+					<li><a href="#">Account</a></li>
+					<li><a href="#">Redeem Gift Cards</a></li>
+					<li><a href="#">Privacy</a></li>
+					<li><a href="#">Speed Test</a></li>
+				</ul>
+				<ul>
+					<li><a href="#">Media Center</a></li>
+					<li><a href="#">Buy Gift Cards</a></li>
+					<li><a href="#">Cookie Preferences</a></li>
+					<li><a href="#">Legal Notices</a></li>
+				</ul> -->
+			</div>
+
+		</footer>
+<!-- partial -->
+<script src="{% static 'js/script.js' %}"></script>
+
+</body>
+</html>
+{% endblock body %}

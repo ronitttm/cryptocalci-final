@@ -1,0 +1,55 @@
+body {
+  background-image: url('../static/images/bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  color: white;
+  font-size: 18px; /* Set default font size */
+}
+
+.container {
+  background-color: #393636;
+  opacity: 0.9;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+}
+
+.card h2 {
+  font-size: 28px; /* Increase heading font size */
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  color: teal;
+  font-weight: bold;
+  font-size: 20px; /* Increase label font size */
+}
+
+.form-control {
+  width: 100%; /* Make input fields full width */
+  font-size: 18px; /* Increase input field font size */
+  padding: 10px;
+  margin-bottom: 20px;
+}
+
+.signup {
+  padding: 15px 30px; /* Increase button padding */
+  font-size: 20px; /* Increase button font size */
+  text-transform: uppercase;
+  background-color: #381bbd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.signup:hover {
+  background-color: #4f28d3;
+}
+ 

@@ -1,12 +1,13 @@
 {% extends "base.html" %}
-{% block title %} Additive {% endblock title %}
+{% block title %} RSA Encryption and Decryption {% endblock title %}
 {% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Additive Cipher Encryption and Decryption</title>
+    <title>RSA Encryption and Decryption</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.4.0/jsrsasign-all-min.js"></script>
     <style>
         /* CSS styles */
         body {
@@ -132,203 +133,65 @@
             color: white; /* Set paragraph text color to white */
         }
     </style>
-
-</head>
-<body>
+    <body>
     <div class="background"></div>
     <div class="container">
-        <h1>Additive Cipher Encryption and Decryption</h1>
-        <p>The additive cipher technique encrypts a message by adding the key to the numerical value of each letter in the plaintext and then taking the result modulo 26. Decryption is performed by subtracting the key from the numerical value of each letter in the ciphertext.</p>
-        
-        <table>
-            <caption>Alphabet Table with Numeric Values</caption>
-            <tr>
-                <th>Alphabet</th>
-                <th>Numeric Value</th>
-                <th>Alphabet</th>
-                <th>Numeric Value</th>
-            </tr>
-            <tr>
-                <td>A</td>
-                <td>0</td>
-                <td>N</td>
-                <td>13</td>
-            </tr>
-        </tr>
-        <tr>
-            <td>B</td>
-            <td>1</td>
-            <td>O</td>
-            <td>14</td>
-        </tr>
-        <tr>
-            <td>C</td>
-            <td>2</td>
-            <td>P</td>
-            <td>15</td>
-        </tr>
-        <tr>
-            <td>D</td>
-            <td>3</td>
-            <td>Q</td>
-            <td>16</td>
-        </tr>
-        <tr>
-            <td>E</td>
-            <td>4</td>
-            <td>R</td>
-            <td>17</td>
-        </tr>
-        <tr>
-            <td>F</td>
-            <td>5</td>
-            <td>S</td>
-            <td>18</td>
-        </tr>
-        <tr>
-            <td>G</td>
-            <td>6</td>
-            <td>T</td>
-            <td>19</td>
-        </tr>
-        <tr>
-            <td>H</td>
-            <td>7</td>
-            <td>U</td>
-            <td>20</td>
-        </tr>
-        <tr>
-            <td>I</td>
-            <td>8</td>
-            <td>V</td>
-            <td>21</td>
-        </tr>
-        <tr>
-            <td>J</td>
-            <td>9</td>
-            <td>W</td>
-            <td>22</td>
-        </tr>
-        <tr>
-            <td>K</td>
-            <td>10</td>
-            <td>X</td>
-            <td>23</td>
-        </tr>
-        <tr>
-            <td>L</td>
-            <td>11</td>
-            <td>Y</td>
-            <td>24</td>
-        </tr>
-        <tr>
-            <td>M</td>
-            <td>12</td>
-            <td>Z</td>
-            <td>25</td>
-        </tr>
-
-        </table>
-
         <div>
             <label for="plaintext">Plaintext:</label>
             <input type="text" id="plaintext" placeholder="Enter plaintext...">
         </div>
+        <button onclick="generateKeys()">Generate RSA Keys</button>
+        <div id="keysContainer" style="display: none;">
+            <label for="publicKey">Public Key (PEM format):</label>
+            <textarea id="publicKey" readonly></textarea>
+            <label for="privateKey">Private Key (PEM format):</label>
+            <textarea id="privateKey" readonly></textarea>
+        </div>
+        <button onclick="encrypt()">Encrypt</button>
+        <button onclick="decrypt()">Decrypt</button>
         <div>
-            <label for="key">Key:</label>
-            <input type="number" id="key">
-        </div>
-        <div class="button-container">
-            <button onclick="encrypt()">Encrypt</button>
-            <button onclick="decrypt()">Decrypt</button>
-        </div>
-        <div class="output-container">
-            <div id="explanation">
-                <label for="step-explanation">Step-by-step explanation:</label>
-                <textarea id="step-explanation" readonly></textarea>
-            </div>
-            <div id="ciphertext-container">
-                <label for="ciphertext">Ciphertext:</label>
-                <textarea id="ciphertext" readonly></textarea>
-            </div>
-            <div id="decryption-container">
-                <label for="decryptedtext">Decrypted Text:</label>
-                <textarea id="decryptedtext" readonly></textarea>
-            </div>
+            <label for="ciphertext">Ciphertext:</label>
+            <textarea id="ciphertext" readonly></textarea>
         </div>
     </div>
-
-    <script>
-        // JavaScript code
-        function encrypt() {
-            var plaintext = document.getElementById("plaintext").value.toUpperCase();
-            var key = parseInt(document.getElementById("key").value);
-            var ciphertext = "";
-            var stepByStep = ""; // Variable to store step-by-step encryption process
-
-            for (var i = 0; i < plaintext.length; i++) {
-                var charCode = plaintext.charCodeAt(i);
-                if (charCode >= 65 && charCode <= 90) { // Check if character is a letter
-                    var x = charCode - 65; // Map A-Z to 0-25
-                    var encryptedCharCode = (x + key) % 26 + 65; // Encrypt using additive cipher formula
-                    ciphertext += String.fromCharCode(encryptedCharCode);
-                    // Build step-by-step explanation
-                    stepByStep += "Step " + (i + 1) + ": ";
-                    stepByStep += plaintext[i] + " -> ";
-                    stepByStep += "(" + x + " + " + key + ") % 26 = ";
-                    stepByStep += (x + key) % 26 + " -> ";
-                    stepByStep += String.fromCharCode(encryptedCharCode);
-                    stepByStep += "\n";
-                } else {
-                    ciphertext += plaintext[i]; // Leave non-letter characters unchanged
-                }
+    
+        <script>
+            var rsaKey;
+    
+            function generateKeys() {
+                rsaKey = new RSAKey();
+                rsaKey.generate(2048, '10001'); // 2048-bit key with public exponent 65537 (0x10001)
+    
+                var publicKey = rsaKey.getPublicString();
+                var privateKey = rsaKey.getPrivateString();
+    
+                document.getElementById("publicKey").value = publicKey;
+                document.getElementById("privateKey").value = privateKey;
+                document.getElementById("keysContainer").style.display = "block";
             }
-            // Display step-by-step explanation
-            document.getElementById("step-explanation").value = stepByStep;
-            // Adjust height of explanation textarea
-            adjustTextareaHeight("step-explanation");
-            // Display ciphertext
-            document.getElementById("ciphertext").value = ciphertext;
-        }
-
-        function decrypt() {
-            var ciphertext = document.getElementById("ciphertext").value.toUpperCase();
-            var key = parseInt(document.getElementById("key").value);
-            var decryptedtext = "";
-            var stepByStep = ""; // Variable to store step-by-step decryption process
-
-            for (var i = 0; i < ciphertext.length; i++) {
-                var charCode = ciphertext.charCodeAt(i);
-                if (charCode >= 65 && charCode <= 90) { // Check if character is a letter
-                    var y = charCode - 65; // Map A-Z to 0-25
-                    var decryptedCharCode = (y - key + 26) % 26 + 65; // Decrypt using additive cipher formula
-                    decryptedtext += String.fromCharCode(decryptedCharCode);
-                    // Build step-by-step explanation
-                    stepByStep += "Step " + (i + 1) + ": ";
-                    stepByStep += ciphertext[i] + " -> ";
-                    stepByStep += "(" + y + " - " + key + " + 26) % 26 = ";
-                    stepByStep += (y - key + 26) % 26 + " -> ";
-                    stepByStep += String.fromCharCode(decryptedCharCode);
-                    stepByStep += "\n";
-                } else {
-                    decryptedtext += ciphertext[i]; // Leave non-letter characters unchanged
-                }
+    
+            function encrypt() {
+                var plaintext = document.getElementById("plaintext").value;
+                var ciphertext = rsaKey.encrypt(plaintext);
+                document.getElementById("ciphertext").value = hex2b64(ciphertext);
             }
-            // Display step-by-step explanation
-            document.getElementById("step-explanation").value = stepByStep;
-            // Adjust height of explanation textarea
-            adjustTextareaHeight("step-explanation");
-            // Display decrypted text
-            document.getElementById("decryptedtext").value = decryptedtext;
-        }
-
-        function adjustTextareaHeight(id) {
-            var textarea = document.getElementById(id);
-            textarea.style.height = "auto";
-            textarea.style.height = textarea.scrollHeight + "px";
-        }
-    </script>
-</body>
-</html>
-
-{% endblock body %}
+    
+            function decrypt() {
+                var ciphertext = document.getElementById("ciphertext").value;
+                var decrypted = rsaKey.decrypt(b64tohex(ciphertext));
+                document.getElementById("plaintext").value = decrypted;
+            }
+    
+            // Utility functions for converting between hex and base64
+            function hex2b64(hex) {
+                return hex.toString(CryptoJS.enc.Base64);
+            }
+    
+            function b64tohex(b64) {
+                return CryptoJS.enc.Base64.parse(b64).toString(CryptoJS.enc.Hex);
+            }
+        </script>
+    </body>
+    </html>
+    
+    {% endblock body %}

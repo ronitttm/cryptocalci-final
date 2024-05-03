@@ -1,12 +1,12 @@
 {% extends "base.html" %}
-{% block title %} Additive {% endblock title %}
+{% block title %} SHA-256 Hash Calculator {% endblock title %}
 {% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Additive Cipher Encryption and Decryption</title>
+    <title>SHA-256 Hash Calculator</title>
     <style>
         /* CSS styles */
         body {
@@ -137,198 +137,39 @@
 <body>
     <div class="background"></div>
     <div class="container">
-        <h1>Additive Cipher Encryption and Decryption</h1>
-        <p>The additive cipher technique encrypts a message by adding the key to the numerical value of each letter in the plaintext and then taking the result modulo 26. Decryption is performed by subtracting the key from the numerical value of each letter in the ciphertext.</p>
-        
-        <table>
-            <caption>Alphabet Table with Numeric Values</caption>
-            <tr>
-                <th>Alphabet</th>
-                <th>Numeric Value</th>
-                <th>Alphabet</th>
-                <th>Numeric Value</th>
-            </tr>
-            <tr>
-                <td>A</td>
-                <td>0</td>
-                <td>N</td>
-                <td>13</td>
-            </tr>
-        </tr>
-        <tr>
-            <td>B</td>
-            <td>1</td>
-            <td>O</td>
-            <td>14</td>
-        </tr>
-        <tr>
-            <td>C</td>
-            <td>2</td>
-            <td>P</td>
-            <td>15</td>
-        </tr>
-        <tr>
-            <td>D</td>
-            <td>3</td>
-            <td>Q</td>
-            <td>16</td>
-        </tr>
-        <tr>
-            <td>E</td>
-            <td>4</td>
-            <td>R</td>
-            <td>17</td>
-        </tr>
-        <tr>
-            <td>F</td>
-            <td>5</td>
-            <td>S</td>
-            <td>18</td>
-        </tr>
-        <tr>
-            <td>G</td>
-            <td>6</td>
-            <td>T</td>
-            <td>19</td>
-        </tr>
-        <tr>
-            <td>H</td>
-            <td>7</td>
-            <td>U</td>
-            <td>20</td>
-        </tr>
-        <tr>
-            <td>I</td>
-            <td>8</td>
-            <td>V</td>
-            <td>21</td>
-        </tr>
-        <tr>
-            <td>J</td>
-            <td>9</td>
-            <td>W</td>
-            <td>22</td>
-        </tr>
-        <tr>
-            <td>K</td>
-            <td>10</td>
-            <td>X</td>
-            <td>23</td>
-        </tr>
-        <tr>
-            <td>L</td>
-            <td>11</td>
-            <td>Y</td>
-            <td>24</td>
-        </tr>
-        <tr>
-            <td>M</td>
-            <td>12</td>
-            <td>Z</td>
-            <td>25</td>
-        </tr>
+        <h1>SHA-256 Hash Calculator</h1>
+        <label for="inputText">Enter text to hash:</label>
+        <input type="text" id="inputText" placeholder="Type your text...">
+        <button onclick="calculateHash()">Calculate SHA-256 Hash</button>
+        <br>
+        <div id="result"></div>
+        <br><br>
+        <div class="iframe-container" style="display:flex; justify-content: center;align-items: center;">
+        <iframe width="923" height="519" src="https://www.youtube.com/embed/nduoUEHrK_4" 
+        title="SHA 256 | SHA 256 Algorithm Explanation | How SHA 256 Algorithm Works | Cryptography | Simplilearn" 
+        frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
 
-        </table>
-
-        <div>
-            <label for="plaintext">Plaintext:</label>
-            <input type="text" id="plaintext" placeholder="Enter plaintext...">
-        </div>
-        <div>
-            <label for="key">Key:</label>
-            <input type="number" id="key">
-        </div>
-        <div class="button-container">
-            <button onclick="encrypt()">Encrypt</button>
-            <button onclick="decrypt()">Decrypt</button>
-        </div>
-        <div class="output-container">
-            <div id="explanation">
-                <label for="step-explanation">Step-by-step explanation:</label>
-                <textarea id="step-explanation" readonly></textarea>
-            </div>
-            <div id="ciphertext-container">
-                <label for="ciphertext">Ciphertext:</label>
-                <textarea id="ciphertext" readonly></textarea>
-            </div>
-            <div id="decryption-container">
-                <label for="decryptedtext">Decrypted Text:</label>
-                <textarea id="decryptedtext" readonly></textarea>
-            </div>
-        </div>
     </div>
-
+    
     <script>
-        // JavaScript code
-        function encrypt() {
-            var plaintext = document.getElementById("plaintext").value.toUpperCase();
-            var key = parseInt(document.getElementById("key").value);
-            var ciphertext = "";
-            var stepByStep = ""; // Variable to store step-by-step encryption process
-
-            for (var i = 0; i < plaintext.length; i++) {
-                var charCode = plaintext.charCodeAt(i);
-                if (charCode >= 65 && charCode <= 90) { // Check if character is a letter
-                    var x = charCode - 65; // Map A-Z to 0-25
-                    var encryptedCharCode = (x + key) % 26 + 65; // Encrypt using additive cipher formula
-                    ciphertext += String.fromCharCode(encryptedCharCode);
-                    // Build step-by-step explanation
-                    stepByStep += "Step " + (i + 1) + ": ";
-                    stepByStep += plaintext[i] + " -> ";
-                    stepByStep += "(" + x + " + " + key + ") % 26 = ";
-                    stepByStep += (x + key) % 26 + " -> ";
-                    stepByStep += String.fromCharCode(encryptedCharCode);
-                    stepByStep += "\n";
-                } else {
-                    ciphertext += plaintext[i]; // Leave non-letter characters unchanged
-                }
-            }
-            // Display step-by-step explanation
-            document.getElementById("step-explanation").value = stepByStep;
-            // Adjust height of explanation textarea
-            adjustTextareaHeight("step-explanation");
-            // Display ciphertext
-            document.getElementById("ciphertext").value = ciphertext;
+        async function calculateHash() {
+            var inputText = document.getElementById("inputText").value;
+            var hashResult = await sha256(inputText);
+            document.getElementById("result").innerText = hashResult;
         }
-
-        function decrypt() {
-            var ciphertext = document.getElementById("ciphertext").value.toUpperCase();
-            var key = parseInt(document.getElementById("key").value);
-            var decryptedtext = "";
-            var stepByStep = ""; // Variable to store step-by-step decryption process
-
-            for (var i = 0; i < ciphertext.length; i++) {
-                var charCode = ciphertext.charCodeAt(i);
-                if (charCode >= 65 && charCode <= 90) { // Check if character is a letter
-                    var y = charCode - 65; // Map A-Z to 0-25
-                    var decryptedCharCode = (y - key + 26) % 26 + 65; // Decrypt using additive cipher formula
-                    decryptedtext += String.fromCharCode(decryptedCharCode);
-                    // Build step-by-step explanation
-                    stepByStep += "Step " + (i + 1) + ": ";
-                    stepByStep += ciphertext[i] + " -> ";
-                    stepByStep += "(" + y + " - " + key + " + 26) % 26 = ";
-                    stepByStep += (y - key + 26) % 26 + " -> ";
-                    stepByStep += String.fromCharCode(decryptedCharCode);
-                    stepByStep += "\n";
-                } else {
-                    decryptedtext += ciphertext[i]; // Leave non-letter characters unchanged
-                }
-            }
-            // Display step-by-step explanation
-            document.getElementById("step-explanation").value = stepByStep;
-            // Adjust height of explanation textarea
-            adjustTextareaHeight("step-explanation");
-            // Display decrypted text
-            document.getElementById("decryptedtext").value = decryptedtext;
-        }
-
-        function adjustTextareaHeight(id) {
-            var textarea = document.getElementById(id);
-            textarea.style.height = "auto";
-            textarea.style.height = textarea.scrollHeight + "px";
+    
+        async function sha256(input) {
+            const msgBuffer = new TextEncoder().encode(input);
+            const hashBuffer = await crypto.subtle.digest("SHA-256", msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            const hashHex = hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+            return hashHex;
         }
     </script>
-</body>
-</html>
-
-{% endblock body %}
+    
+    </body>
+    </html>
+    
+    {% endblock body %}

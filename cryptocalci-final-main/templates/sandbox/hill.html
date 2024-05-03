@@ -1,175 +1,257 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %} Caeser Method {% endblock title %}
+{% block title %} Hill {% endblock title %}
 {% block body %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CryptoCalci</title>
-    <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'>
-    <link rel="stylesheet" href="{% static 'css/ag_hillc.css' %}">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../static/css/aos.css">
-    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"
-          rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Cipher Encryption and Decryption</title>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            {% comment %} background-image: url('../static/images/bg1.png');
+            filter: blur(5px); /* Adjust the blur radius as needed */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center; {% endcomment %}
+            height: 200vh; /* Set full viewport height */
+            color: white; /* Set text color to white */
 
-          <style>
-            body {
-                background-image: url('../static/images/bg.jpg');
-                /* Replace 'your-image-url.jpg' with your image file path */
-                background-size: cover;
-                /* This ensures the image covers the entire background */
-                background-repeat: no-repeat;
-                /* Prevents the image from repeating */
-                background-attachment: fixed;
-                color: white;
-                /* Fixes the background while scrolling */
-            }
-        
-            .container {
-                background-color: #393636;
-                opacity: 0.9;
-                padding: 30px;
-                border-radius: 10px;
-            }
-        
-            .card {
-                border: none;
-                border-radius: 10px;
-            }
-        
-            .card h2 {
-                font-size: 28px;
-                /* Increase heading font size */
-                margin-bottom: 20px;
-            }
-        
-            .form-group label {
-                color: teal;
-                font-weight: bold;
-                font-size: 20px;
-                /* Increase label font size */
-            }
-        
-            .form-control {
-                width: 100%;
-                /* Make input fields full width */
-                font-size: 18px;
-                /* Increase input field font size */
-                padding: 10px;
-                margin-bottom: 20px;
-            }
-        
-            .signup {
-                padding: 15px 30px;
-                /* Increase button padding */
-                font-size: 20px;
-                /* Increase button font size */
-                text-transform: uppercase;
-                background-color: #381bbd;
-                color: #fff;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                transition: background-color 0.3s;
-            }
-        
-            .signup:hover {
-                background-color: #4f28d3;
-            }
-        </style>
+        }
+        .background{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the background behind other content */
+            background-image: url('../static/images/bg1.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Apply blur effect to the background image */
+        }
 
-  
+        .container {
+            max-width: 1000px; /* Set a wider container width */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            resize: none;
+            overflow: auto;
+            height: auto;
+            border: 1px solid white; /* Set border color to white */
+            border-radius: 5px;
+            color: black; /* Set text color to black within input fields */
+            background-color: white; /* Set background color to white within input fields */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        #explanation,
+        #ciphertext,
+        #decryptedtext {
+            margin-top: 10px;
+        }
+
+        #step-explanation {
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            resize: none;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white; /* Set background color of table to white */
+            color: black; /* Set text color of table to black */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white; /* Set heading color to white */
+        }
+
+        p {
+            color: white; /* Set paragraph text color to white */
+        }
+    </style>
+    
+</head>
 <body>
-    <header class="showcase">
-        <div class="menu">
-            <div class="title">MENU</div>
-            <ul class="nav">
-              <li><a href="/index.html">Home</a></li>
-              <li><a href="/route/main1.html">Algorithms</a></li>
-              <li><a href="#">About</a></li>
-              <li><a href="/route/main2.html">Services</a></li>
-              <li><a href="#">Contact</a></li>
-            </ul>
+    <div class="background"></div>
+    <div class="container">
+        <h1>Hill Cipher Encryption and Decryption</h1>
+        <p>The Hill cipher encrypts a message by multiplying plaintext blocks with a matrix and then taking modulo 26 operations.</p>
+        
+        <div>
+            <label for="plaintext">Plaintext:</label>
+            <input type="text" id="plaintext" placeholder="Enter plaintext...">
         </div>
-        <div class="showcase-top">
-            <img src="/img/2.png" ,align="Center" />
-        <div id="pricing-table" class="clear">
-            <div class="plan1">
-                <h3 style="color:black">Matrix<span>M</span></h3>	
-                <ul>
-                    <li>Enter Matrix Value</li>
-                    <div id="inSec">
-                        <div id="EDMenu">
-                        <button id="enhButton0" type="button">Encrypt</button>
-                        <button id="dehButton0" type="button">Decrypt</button>
-                      </div>
-                      
-                        <select id="choice">
-                            <option value="m22">2 X 2 Matrix</option>
-                            <option value="m33">3 X 3 Matrix</option>
-                        </select>
-                      
-                        <form id="m22">
-                          <input id="tw0" type="number" name="index" min="0" max="25">
-                          <input id="tw1" type="number" name="index" min="0" max="25"> <br />
-                          <input id="tw2" type="number" name="index" min="0" max="25">
-                          <input id="tw3" type="number" name="index" min="0" max="25">
-                        </form>
-                      
-                      
-                        <form id="m33">
-                          <input id="tr0" type="number" name="index" min="0" max="25">
-                          <input id="tr1" type="number" name="index" min="0" max="25">
-                          <input id="tr2" type="number" name="index" min="0" max="25"><br />
-                          <input id="tr3" type="number" name="index" min="0" max="25">
-                          <input id="tr4" type="number" name="index" min="0" max="25">
-                          <input id="tr5"  type="number" name="index" min="0" max="25"><br />
-                          <input id="tr6" type="number" name="index" min="0" max="25">
-                          <input id="tr7" type="number" name="index" min="0" max="25">
-                          <input id="tr8" type="number" name="index" min="0" max="25">
-                        </form>
-                      
-                        <button id="subButtonH" type="button">Submit</button><br>
-                      
-                      </div>
-                </div>
+        <div>
+            <label for="matrix">Encryption Matrix (3x3):</label>
+            <textarea id="matrix" placeholder="Enter a 3x3 matrix..."></textarea>
+        </div>
+        <div class="button-container">
+            <button onclick="encrypt()">Encrypt</button>
+            <button onclick="decrypt()">Decrypt</button>
+        </div>
+        <div class="output-container">
+            <div id="explanation">
+                <label for="step-explanation">Step-by-step explanation:</label>
+                <textarea id="step-explanation" readonly></textarea>
             </div>
-            <div id="pricing-table" class="clear">
-                <div class="plan">
-                    <h3 style="color:black">Encryption<span>E</span></h3>         
-                    <ul>
-                        <li>Enter Plaintext</li>	
-                        <li><input id="textP"name="plainM"></input></li>
-                        <li><pre id="encT"></pre></li>
-                        <button id="encButton" type="button">Encrypt</button>
-                </ul>
-                </div>
-                    <div class="plan">
-                    <h3 style="color:black">Decryption<span>D</span></h3>	
-                    <ul>
-                        <li>Enter Ciphertext</li>
-                        <li><textarea id="textC"name="cipherM"></textarea></li>	
-                        <li><pre id="decT"></pre></li>
-                        <button id="decButton" type="button">Decrypt</button>
-                    </ul>
-                    
-                </div> 	 	
-            </div> 	
+            <div id="ciphertext-container">
+                <label for="ciphertext">Ciphertext:</label>
+                <textarea id="ciphertext" readonly></textarea>
+            </div>
+            <div id="decryption-container">
+                <label for="decryptedtext">Decrypted Text:</label>
+                <textarea id="decryptedtext" readonly></textarea>
+            </div>
         </div>
+    </div>
 
-    </header>
-<script src="{% static "js/ag_hillc_scripts/util.js"%}"></script>
-<script src="{% static "js/ag_hillc_scripts/storage.js"%}"></script>
-<script src="{% static "js/ag_hillc_scripts/encrypt.js"%}"></script>
-<script src="{% static "js/ag_hillc_scripts/decrypt.js"%}"></script>
-<script src="{% static "js/ag_hillc_scripts/index.js"%}"></script>
-</body> 
+    <script>
+        // JavaScript code
+        function encrypt() {
+            var plaintext = document.getElementById("plaintext").value.toUpperCase();
+            var matrixInput = document.getElementById("matrix").value;
+            var matrix = parseMatrix(matrixInput);
+
+            if (!matrix || matrix.length !== 3 || matrix[0].length !== 3) {
+                alert("Invalid matrix format. Please enter a valid 3x3 matrix.");
+                return;
+            }
+
+            var ciphertext = "";
+            var stepByStep = ""; // Variable to store step-by-step encryption process
+
+            // Process plaintext in blocks of 3 characters
+            for (var i = 0; i < plaintext.length; i += 3) {
+                var block = plaintext.slice(i, i + 3);
+
+                if (block.length < 3) {
+                    // Pad the block if its length is less than 3
+                    block = block.padEnd(3, 'X');
+                }
+
+                // Convert block to vector
+                var vector = block.split('').map(char => char.charCodeAt(0) - 65);
+
+                // Multiply vector by matrix (mod 26)
+                var encryptedVector = multiplyMatrixVector(matrix, vector);
+
+                // Convert back to characters
+                var encryptedBlock = encryptedVector.map(code => String.fromCharCode((code % 26) + 65)).join('');
+
+                // Build step-by-step explanation
+                stepByStep += "Plaintext block: " + block + " -> Encrypted block: " + encryptedBlock + "\n";
+
+                // Append to ciphertext
+                ciphertext += encryptedBlock;
+            }
+
+            // Display step-by-step explanation
+            document.getElementById("step-explanation").value = stepByStep;
+            // Display ciphertext
+            document.getElementById("ciphertext").value = ciphertext;
+        }
+
+        function decrypt() {
+            // To be implemented
+            alert("Decryption function not implemented yet.");
+        }
+
+        function parseMatrix(input) {
+            try {
+                var lines = input.trim().split('\n');
+                var matrix = [];
+
+                for (var i = 0; i < lines.length; i++) {
+                    var row = lines[i].trim().split(/\s+/).map(Number);
+                    matrix.push(row);
+                }
+
+                return matrix;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function multiplyMatrixVector(matrix, vector) {
+            var result = [];
+
+            for (var i = 0; i < matrix.length; i++) {
+                var sum = 0;
+
+                for (var j = 0; j < vector.length; j++) {
+                    sum += matrix[i][j] * vector[j];
+                }
+
+                result.push(sum);
+            }
+
+            return result;
+        }
+    </script>
+</body>
 </html>
+
 {% endblock body %}

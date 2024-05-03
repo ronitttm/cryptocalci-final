@@ -1,0 +1,197 @@
+{% extends "base.html" %}
+{% block title %} RSA Encryption and Decryption {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Encryption and Decryption</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.4.0/jsrsasign-all-min.js"></script>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            {% comment %} background-image: url('../static/images/bg1.png');
+            filter: blur(5px); /* Adjust the blur radius as needed */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center; {% endcomment %}
+            height: 200vh; /* Set full viewport height */
+            color: white; /* Set text color to white */
+
+        }
+        .background{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the background behind other content */
+            background-image: url('../static/images/bg1.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Apply blur effect to the background image */
+        }
+
+        .container {
+            max-width: 1000px; /* Set a wider container width */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            resize: none;
+            overflow: auto;
+            height: auto;
+            border: 1px solid white; /* Set border color to white */
+            border-radius: 5px;
+            color: black; /* Set text color to black within input fields */
+            background-color: white; /* Set background color to white within input fields */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        #explanation,
+        #ciphertext,
+        #decryptedtext {
+            margin-top: 10px;
+        }
+
+        #step-explanation {
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            resize: none;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white; /* Set background color of table to white */
+            color: black; /* Set text color of table to black */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white; /* Set heading color to white */
+        }
+
+        p {
+            color: white; /* Set paragraph text color to white */
+        }
+    </style>
+    <body>
+    <div class="background"></div>
+    <div class="container">
+        <div>
+            <label for="plaintext">Plaintext:</label>
+            <input type="text" id="plaintext" placeholder="Enter plaintext...">
+        </div>
+        <button onclick="generateKeys()">Generate RSA Keys</button>
+        <div id="keysContainer" style="display: none;">
+            <label for="publicKey">Public Key (PEM format):</label>
+            <textarea id="publicKey" readonly></textarea>
+            <label for="privateKey">Private Key (PEM format):</label>
+            <textarea id="privateKey" readonly></textarea>
+        </div>
+        <button onclick="encrypt()">Encrypt</button>
+        <button onclick="decrypt()">Decrypt</button>
+        <div>
+            <label for="ciphertext">Ciphertext:</label>
+            <textarea id="ciphertext" readonly></textarea>
+        </div>
+    </div>
+    
+        <script>
+            var rsaKey;
+    
+            function generateKeys() {
+                rsaKey = new RSAKey();
+                rsaKey.generate(2048, '10001'); // 2048-bit key with public exponent 65537 (0x10001)
+    
+                var publicKey = rsaKey.getPublicString();
+                var privateKey = rsaKey.getPrivateString();
+    
+                document.getElementById("publicKey").value = publicKey;
+                document.getElementById("privateKey").value = privateKey;
+                document.getElementById("keysContainer").style.display = "block";
+            }
+    
+            function encrypt() {
+                var plaintext = document.getElementById("plaintext").value;
+                var ciphertext = rsaKey.encrypt(plaintext);
+                document.getElementById("ciphertext").value = hex2b64(ciphertext);
+            }
+    
+            function decrypt() {
+                var ciphertext = document.getElementById("ciphertext").value;
+                var decrypted = rsaKey.decrypt(b64tohex(ciphertext));
+                document.getElementById("plaintext").value = decrypted;
+            }
+    
+            // Utility functions for converting between hex and base64
+            function hex2b64(hex) {
+                return hex.toString(CryptoJS.enc.Base64);
+            }
+    
+            function b64tohex(b64) {
+                return CryptoJS.enc.Base64.parse(b64).toString(CryptoJS.enc.Hex);
+            }
+        </script>
+    </body>
+    </html>
+    
+    {% endblock body %}

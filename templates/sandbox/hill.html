@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+{% block title %} Hill {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hill Cipher Encryption and Decryption</title>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            {% comment %} background-image: url('../static/images/bg1.png');
+            filter: blur(5px); /* Adjust the blur radius as needed */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center; {% endcomment %}
+            height: 200vh; /* Set full viewport height */
+            color: white; /* Set text color to white */
+
+        }
+        .background{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the background behind other content */
+            background-image: url('../static/images/bg1.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Apply blur effect to the background image */
+        }
+
+        .container {
+            max-width: 1000px; /* Set a wider container width */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            resize: none;
+            overflow: auto;
+            height: auto;
+            border: 1px solid white; /* Set border color to white */
+            border-radius: 5px;
+            color: black; /* Set text color to black within input fields */
+            background-color: white; /* Set background color to white within input fields */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        #explanation,
+        #ciphertext,
+        #decryptedtext {
+            margin-top: 10px;
+        }
+
+        #step-explanation {
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            resize: none;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white; /* Set background color of table to white */
+            color: black; /* Set text color of table to black */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white; /* Set heading color to white */
+        }
+
+        p {
+            color: white; /* Set paragraph text color to white */
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1>Hill Cipher Encryption and Decryption</h1>
+        <p>The Hill cipher encrypts a message by multiplying plaintext blocks with a matrix and then taking modulo 26 operations.</p>
+        
+        <div>
+            <label for="plaintext">Plaintext:</label>
+            <input type="text" id="plaintext" placeholder="Enter plaintext...">
+        </div>
+        <div>
+            <label for="matrix">Encryption Matrix (3x3):</label>
+            <textarea id="matrix" placeholder="Enter a 3x3 matrix..."></textarea>
+        </div>
+        <div class="button-container">
+            <button onclick="encrypt()">Encrypt</button>
+            <button onclick="decrypt()">Decrypt</button>
+        </div>
+        <div class="output-container">
+            <div id="explanation">
+                <label for="step-explanation">Step-by-step explanation:</label>
+                <textarea id="step-explanation" readonly></textarea>
+            </div>
+            <div id="ciphertext-container">
+                <label for="ciphertext">Ciphertext:</label>
+                <textarea id="ciphertext" readonly></textarea>
+            </div>
+            <div id="decryption-container">
+                <label for="decryptedtext">Decrypted Text:</label>
+                <textarea id="decryptedtext" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code
+        function encrypt() {
+            var plaintext = document.getElementById("plaintext").value.toUpperCase();
+            var matrixInput = document.getElementById("matrix").value;
+            var matrix = parseMatrix(matrixInput);
+
+            if (!matrix || matrix.length !== 3 || matrix[0].length !== 3) {
+                alert("Invalid matrix format. Please enter a valid 3x3 matrix.");
+                return;
+            }
+
+            var ciphertext = "";
+            var stepByStep = ""; // Variable to store step-by-step encryption process
+
+            // Process plaintext in blocks of 3 characters
+            for (var i = 0; i < plaintext.length; i += 3) {
+                var block = plaintext.slice(i, i + 3);
+
+                if (block.length < 3) {
+                    // Pad the block if its length is less than 3
+                    block = block.padEnd(3, 'X');
+                }
+
+                // Convert block to vector
+                var vector = block.split('').map(char => char.charCodeAt(0) - 65);
+
+                // Multiply vector by matrix (mod 26)
+                var encryptedVector = multiplyMatrixVector(matrix, vector);
+
+                // Convert back to characters
+                var encryptedBlock = encryptedVector.map(code => String.fromCharCode((code % 26) + 65)).join('');
+
+                // Build step-by-step explanation
+                stepByStep += "Plaintext block: " + block + " -> Encrypted block: " + encryptedBlock + "\n";
+
+                // Append to ciphertext
+                ciphertext += encryptedBlock;
+            }
+
+            // Display step-by-step explanation
+            document.getElementById("step-explanation").value = stepByStep;
+            // Display ciphertext
+            document.getElementById("ciphertext").value = ciphertext;
+        }
+
+        function decrypt() {
+            // To be implemented
+            alert("Decryption function not implemented yet.");
+        }
+
+        function parseMatrix(input) {
+            try {
+                var lines = input.trim().split('\n');
+                var matrix = [];
+
+                for (var i = 0; i < lines.length; i++) {
+                    var row = lines[i].trim().split(/\s+/).map(Number);
+                    matrix.push(row);
+                }
+
+                return matrix;
+            } catch (error) {
+                return null;
+            }
+        }
+
+        function multiplyMatrixVector(matrix, vector) {
+            var result = [];
+
+            for (var i = 0; i < matrix.length; i++) {
+                var sum = 0;
+
+                for (var j = 0; j < vector.length; j++) {
+                    sum += matrix[i][j] * vector[j];
+                }
+
+                result.push(sum);
+            }
+
+            return result;
+        }
+    </script>
+</body>
+</html>
+
+{% endblock body %}

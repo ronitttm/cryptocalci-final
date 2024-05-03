@@ -1,0 +1,303 @@
+{% extends "base.html" %}
+{% block title %} Affine {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affine Cipher Encryption and Decryption</title>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            {% comment %} background-image: url('../static/images/bg1.png');
+            filter: blur(5px); /* Adjust the blur radius as needed */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center; {% endcomment %}
+            height: 200vh; /* Set full viewport height */
+            color: white; /* Set text color to white */
+
+        }
+        .background{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the background behind other content */
+            background-image: url('../static/images/sandbox.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Apply blur effect to the background image */
+        }
+
+        .container {
+            max-width: 1000px; /* Set a wider container width */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            resize: none;
+            overflow: auto;
+            height: auto;
+            border: 1px solid white; /* Set border color to white */
+            border-radius: 5px;
+            color: black; /* Set text color to black within input fields */
+            background-color: white; /* Set background color to white within input fields */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        #explanation,
+        #ciphertext,
+        #decryptedtext {
+            margin-top: 10px;
+        }
+
+        #step-explanation {
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            resize: none;
+            height: auto;
+        }
+        
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white; /* Set background color of table to white */
+            color: black; /* Set text color of table to black */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white; /* Set heading color to white */
+        }
+
+        p {
+            color: white; /* Set paragraph text color to white */
+        }
+    </style>
+
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+        <h1>Affine Cipher Encryption and Decryption</h1>
+        <p>The Affine cipher is a type of monoalphabetic substitution cipher. It encrypts a message by applying a simple mathematical function.</p>
+        <p>Encryption Formula: \( E(x) = (ax + b) \mod 26 \)</p>
+        <p>Decryption Formula: \( D(x) = a^{-1}(x - b) \mod 26 \)</p>
+        <p>Where:</p>
+        <ul>
+            <li>\( E(x) \) is the encrypted letter</li>
+            <li>\( D(x) \) is the decrypted letter</li>
+            <li>\( x \) is the position of the letter in the alphabet (0-25)</li>
+            <li>\( a \) and \( b \) are the key parameters</li>
+            <li>\( a \) should be chosen to be relatively prime to 26 (i.e., they have no common factors except 1).</li>
+            <li>The whole process relies on working modulo 26 (the length of the English alphabet).</li>
+        </ul>
+        <div>
+            <label for="plaintext">Plaintext:</label>
+            <input type="text" id="plaintext" placeholder="Enter plaintext...">
+        </div>
+        <div>
+            <label for="a">Value of 'a' (should be relatively prime to 26):</label>
+            <input type="number" id="a">
+        </div>
+        <div>
+            <label for="b">Value of 'b':</label>
+            <input type="number" id="b">
+        </div>
+        <div class="button-container">
+            <button onclick="encrypt()">Encrypt</button>
+            <button onclick="decrypt()">Decrypt</button>
+        </div>
+        <div class="output-container">
+            <div id="explanation">
+                <label for="step-explanation">Step-by-step explanation:</label>
+                <textarea id="step-explanation" readonly></textarea>
+            </div>
+            <div id="ciphertext-container">
+                <label for="ciphertext">Ciphertext:</label>
+                <textarea id="ciphertext" readonly></textarea>
+            </div>
+            <div id="decipheredtext-container">
+                <label for="decipheredtext">Deciphered Text:</label>
+                <textarea id="decipheredtext" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code
+        function encrypt() {
+            var plaintext = document.getElementById("plaintext").value.toUpperCase();
+            var a = parseInt(document.getElementById("a").value);
+            var b = parseInt(document.getElementById("b").value);
+            var ciphertext = "";
+            var stepByStep = ""; // Variable to store step-by-step encryption process
+
+            // Check if 'a' is relatively prime to 26
+            if (!isRelativelyPrime(a, 26)) {
+                document.getElementById("step-explanation").value = "'a' should be relatively prime to 26";
+                document.getElementById("ciphertext").value = "Encryption failed.";
+                return;
+            }
+
+            for (var i = 0; i < plaintext.length; i++) {
+                var charCode = plaintext.charCodeAt(i);
+                if (charCode >= 65 && charCode <= 90) { // Check if character is a letter
+                    var x = charCode - 65; // Map A-Z to 0-25
+                    var encryptedCharCode = ((a * x + b) % 26) + 65; // Encrypt using Affine cipher formula
+                    ciphertext += String.fromCharCode(encryptedCharCode);
+                    // Build step-by-step explanation
+                    stepByStep += "Step " + (i + 1) + ": ";
+                    stepByStep += plaintext[i] + " -> ";
+                    stepByStep += "(" + a + " * " + x + " + " + b + ") % 26 = ";
+                    stepByStep += "(" + (a * x) + " + " + b + ") % 26 = ";
+                    stepByStep += encryptedCharCode + " -> ";
+                    stepByStep += String.fromCharCode(encryptedCharCode);
+                    stepByStep += "\n";
+                } else {
+                    ciphertext += plaintext[i]; // Leave non-letter characters unchanged
+                }
+            }
+            // Display step-by-step explanation
+            document.getElementById("step-explanation").value = stepByStep;
+            // Display ciphertext
+            document.getElementById("ciphertext").value = ciphertext;
+        }
+
+        function decrypt() {
+            var ciphertext = document.getElementById("ciphertext").value.toUpperCase();
+            var a = parseInt(document.getElementById("a").value);
+            var b = parseInt(document.getElementById("b").value);
+            var decryptedtext = "";
+            var stepByStep = ""; // Variable to store step-by-step decryption process
+
+            // Check if 'a' is relatively prime to 26
+            if (!isRelativelyPrime(a, 26)) {
+                document.getElementById("step-explanation").value = "'a' should be relatively prime to 26";
+                document.getElementById("decipheredtext").value = "Decryption failed.";
+                return;
+            }
+
+            // Find the modular multiplicative inverse of the key 'a'
+            var inverseKey = findMultiplicativeInverse(a, 26);
+
+            if (inverseKey === null) {
+                // Display error if inverse does not exist
+                document.getElementById("step-explanation").value = "Error: Modular multiplicative inverse does not exist for the given key and modulus (26).";
+                document.getElementById("decipheredtext").value = "Decryption failed.";
+                return;
+            }
+
+            for (var i = 0; i < ciphertext.length; i++) {
+                var charCode = ciphertext.charCodeAt(i);
+                if (charCode >= 65 && charCode <= 90) { // Check if character is a letter
+                    var y = charCode - 65; // Map A-Z to 0-25
+                    // Decrypt using Affine cipher formula
+                    var decryptedCharCode = (inverseKey * (y - b)) % 26;
+                    // Handle negative values
+                    if (decryptedCharCode < 0) {
+                        decryptedCharCode += 26;
+                    }
+                    decryptedCharCode += 65; // Map back to ASCII range for uppercase letters
+                    decryptedtext += String.fromCharCode(decryptedCharCode);
+                    // Build step-by-step explanation
+                    stepByStep += "Step " + (i + 1) + ": ";
+                    stepByStep += ciphertext[i] + " -> ";
+                    stepByStep += "Inverse Key: " + inverseKey + ", (y - " + b + ") % 26 = ";
+                    stepByStep += "(" + y + " - " + b + ") % 26 = ";
+                    stepByStep += decryptedCharCode + " -> ";
+                    stepByStep += String.fromCharCode(decryptedCharCode);
+                    stepByStep += "\n";
+                } else {
+                    decryptedtext += ciphertext[i]; // Leave non-letter characters unchanged
+                }
+            }
+            // Display step-by-step explanation
+            document.getElementById("step-explanation").value = stepByStep;
+            // Display decrypted text
+            document.getElementById("decipheredtext").value = decryptedtext;
+        }
+
+        // Function to check if 'a' is relatively prime to 'n'
+        function isRelativelyPrime(a, n) {
+            for (var i = 2; i <= Math.min(a, n); i++) {
+                if (a % i === 0 && n % i === 0) {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        // Function to find modular multiplicative inverse
+        function findMultiplicativeInverse(a, m) {
+            for (var i = 1; i < m; i++) {
+                if ((a * i) % m === 1) {
+                    return i;
+                }
+            }
+            return null; // Inverse does not exist
+        }
+    </script>
+</body>
+</html>
+
+{% endblock body %}

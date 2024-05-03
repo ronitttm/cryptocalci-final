@@ -1,0 +1,201 @@
+{% extends "base.html" %}
+{% block title %} AES Encryption {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES Encryption</title>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            {% comment %} background-image: url('../static/images/bg1.png');
+            filter: blur(5px); /* Adjust the blur radius as needed */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center; {% endcomment %}
+            height: 200vh; /* Set full viewport height */
+            color: white; /* Set text color to white */
+
+        }
+        .background{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the background behind other content */
+            background-image: url('../static/images/bg1.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Apply blur effect to the background image */
+        }
+
+        .container {
+            max-width: 1000px; /* Set a wider container width */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            resize: none;
+            overflow: auto;
+            height: auto;
+            border: 1px solid white; /* Set border color to white */
+            border-radius: 5px;
+            color: black; /* Set text color to black within input fields */
+            background-color: white; /* Set background color to white within input fields */
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .output-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+
+        #explanation,
+        #ciphertext,
+        #decryptedtext {
+            margin-top: 10px;
+        }
+
+        #step-explanation {
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            resize: none;
+            height: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white; /* Set background color of table to white */
+            color: black; /* Set text color of table to black */
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+
+        h1 {
+            text-align: center;
+            color: white; /* Set heading color to white */
+        }
+
+        p {
+            color: white; /* Set paragraph text color to white */
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="container">
+        <h1>AES Encryption and Decryption</h1>
+        <div>
+            <label for="plaintext">Input Text:</label>
+            <input type="text" id="inputText" placeholder="Enter text...">
+        </div>
+        <div>
+            <label for="plaintext">Encryption/Decryption Key:</label>
+            <input type="text" id="key" placeholder="Enter encryption key...">
+        </div>
+        <button onclick="encrypt()">Encrypt</button>
+        <button onclick="decrypt()">Decrypt</button>
+
+        <div class="output">
+            <label for="outputText">Output Text:</label>
+            <textarea id="outputText" readonly></textarea>
+        </div>
+        <div class="iframe-container" style="display:flex; justify-content: center;align-items: center;">
+            <iframe width="923" height="519" src="https://www.youtube.com/embed/Z_7aOkS8tOA" 
+            title="AES - Advanced Encryption Standard Algorithm In Cryptography | AES Explained | Simplilearn" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+
+    </div>
+     
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.0.0/crypto-js.min.js"></script>
+    <script>
+        function encrypt() {
+            var plaintext = document.getElementById("inputText").value;
+            var key = document.getElementById("key").value;
+
+            if (!plaintext || !key) {
+                alert("Please enter both text and encryption key.");
+                return;
+            }
+
+            var ciphertext = CryptoJS.AES.encrypt(plaintext, key).toString();
+            document.getElementById("outputText").value = ciphertext;
+        }
+
+        function decrypt() {
+            var ciphertext = document.getElementById("outputText").value;
+            var key = document.getElementById("key").value;
+
+            if (!ciphertext || !key) {
+                alert("Please enter both ciphertext and decryption key.");
+                return;
+            }
+
+            var bytes = CryptoJS.AES.decrypt(ciphertext, key);
+            var decryptedText = bytes.toString(CryptoJS.enc.Utf8);
+
+            document.getElementById("outputText").value = decryptedText;
+        }
+    </script>
+</body>
+</html>
+
+{% endblock body %}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CryptoCalci</title>
+  <link rel='stylesheet' href='https://use.fontawesome.com/releases/v5.8.2/css/all.css'><link rel="stylesheet" href="/css/common.css">
+  <script src="multiplicative.js"></script>
+</head>
+<script>
+    var information = document.getElementById("myinformation");
+    var instructions = document.getElementById("myinstructions");
+    var informtion_button = document.getElementById("information");
+    var instructions_button = document.getElementById("instructions");
+    var span = document.getElementsByClassName("close1")[0];
+    var span1 = document.getElementsByClassName("close2")[0];
+    informtion_button.onclick = function() {
+      if(information.style.display === "block")
+      {
+      information.style.display = "none";
+      }
+      else{
+        information.style.display = "block";
+      }
+    }
+    instructions_button.onclick = function() {
+      if(instructions.style.display==="block")
+      {
+      instructions.style.display = "none";
+      }
+      else{
+        instructions.style.display = "block";
+      }
+    }
+    span.onclick = function() {
+      information.style.display = "none";
+    }
+    span1.onclick = function() {
+      instructions.style.display = "none";
+    }
+    window.onclick = function(event) {
+      if (event.target == information) {
+        information.style.display = "none";
+      }
+    }
+    window.onclick = function(event) {
+      if (event.target == instructions) {
+        instructions.style.display = "none";
+      }
+    }
+    </script>
+  
+<body>
+    <header class="showcase">
+      <div class="menu">
+        <div class="title">MENU</div>
+        <ul class="nav">
+          <li><a href="/index.html">Home</a></li>
+          <li><a href="/route/main1.html">Algorithms</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="/route/main2.html">Services</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+    </div>
+        <div class="showcase-top">
+            <img src="/img/2.png" ,align="Center" />
+        <div id="pricing-table" class="clear">
+            <div class="plan">
+                <h3 style="color:black">Encryption<span>E</span></h3>         
+                <ul>
+                    <li>Enter Plaintext</li>	
+                    <li><textarea name="input" rows="4" cols="20" id="inputMessage" placeholder="Input"></textarea></li>
+                    <li>Enter Key</li>
+                    <li><input type="text" id="enteredKey" placeholder=" Enter Key"></li>	
+                <button class="signup" id="cipherButtonPoly" onclick="cipherButtonFunction()" >Cipher</button>	
+            </ul>
+            </div>
+                <div class="plan">
+                <h3 style="color:black">Decryption<span>D</span></h3>	
+                <ul>
+                    <li>Enter Ciphertext</li>
+                    <li><textarea name="result" rows="8" cols="10" id="result" placeholder="Output"></textarea></li>	
+                </ul>
+                <button class="signup" id="decipherButton" onclick="decipherButtonFunction()">Decipher</button>	
+            </div> 	 	
+        </div>
+        <div id="pricing-table" class="clear">
+          <div class="plan1">
+              <h1 style="color:black">Additive Cipher</h1>	
+              <h2>Multiplicative cipher technique is a monoalphabetic substitution cipher technique.<br>
+                It uses a single bit key (k) to encrypt or decrypt a message.<br>
+                After converting the plain text and the key to integers, it uses to following formulas to 
+                encrypt and decrypt the message:<br>
+                Encryption: CT = (Pi * k) mod 26<br>
+                Decryption: D = (CTi * (k)^-1) mod 26<br>
+                Where k<br>
+                -1 is inverse of the multiplicative key.<br>
+                The integers are converted back to alphabets to get the encrypted/decrypted text.</h2>
+          </div>
+      </div>
+    </header>
+<script src="/js/common.js"></script>
+<script type="text/javascript"src="/js/multiplicative.js"></script>
+<script type="text/javascript" src="/js/main.js"></script>
+<script>
+  AOS.init({
+duration: 1200,
+})
+  </script>
+</body>
+</html>

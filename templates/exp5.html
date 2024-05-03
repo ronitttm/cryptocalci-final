@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+{% block title %}Experiment5{% endblock title %}
+{% block body %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href='..\static\css\crypto.css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../static/css/aos.css">
+    <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../static/css/owl.theme.default.min.css">
+
+    <style>
+      body {
+        background-image: url('../static/images/bg.jpg');
+        /* Replace 'your-image-url.jpg' with your image file path */
+        background-size: cover;
+        /* This ensures the image covers the entire background */
+        background-repeat: no-repeat;
+        /* Prevents the image from repeating */
+        background-attachment: fixed;
+        color: white;
+        /* Fixes the background while scrolling */
+      }
+  
+      .container {
+        background-color: #393636;
+        opacity: 10;
+        /* Set the background color you want */
+      }
+  
+      .page {
+        background-color: rgba(0, 0, 0, 0.8);
+        /* Replace 0.5 with the desired opacity (0 to 1) */
+  
+        /* styles.css */
+        .upload-button {
+          background-color: #3498db;
+          /* Set the background color */
+          color: #fff;
+          /* Set the text color */
+          padding: 10px 20px;
+          /* Add padding for spacing */
+          border: none;
+          /* Remove the button border */
+          border-radius: 5px;
+          /* Add rounded corners */
+          cursor: pointer;
+          /* Change cursor on hover to indicate interactivity */
+          transition: background-color 0.3s;
+          /* Add a smooth background color transition */
+  
+          /* Add a hover effect */
+          &:hover {
+            background-color: #2e86c1;
+            /* Change background color on hover */
+          }
+        }
+  
+      }
+  
+      /* Add this CSS in your styles.css file or within a <style> tag in your HTML */
+      label[for^="id_code"],
+      label[for^="id_image"] {
+        color: teal;
+        /* Set the text color to teal blue */
+        font-weight: bold;
+        /* Make the text bold */
+        vertical-align: top;
+  
+      }
+    </style>
+  
+  </head>
+  <body>
+     <!-- HERO -->
+    <section class="page col-lg-7 mx-auto col-md-10 col-12 ">
+     <!-- BLOG DETAIL -->
+     <section class="project-detail">
+          <div class="container">
+               <div class="row">
+                <div class="col-lg-9 mx-auto col-md-10 col-12 mt-lg-5 text-center" data-aos="fade-up">
+                      <h1 class="blog-category text-info white-text">CryptoCalci: Virtual Labs</h1>
+                      <h4>Experiment 4</h4>
+                      <h2>Aim : </h2>
+                      <h4>Write a program to implement DES ciphering method using Java/Python.</h4>
+
+                      <div class="client-info">
+                          <div class="d-flex justify-content-center align-items-center mt-3">
+                            <img src="../static/images/flask.jpg" class="avatar-md img-thumbnail rounded-circle" alt="male avatar">
+                          </div>
+                      </div>
+                      <div><br><br></div>
+                    </div>
+               </div>
+          </div>
+     </section>
+     <br>
+     <!-- <div class="full-image text-center" data-aos="zoom-in">
+       <img src="images/blog/blog-header-image.jpg" class="img-fluid" alt="blog header">
+     </div> -->
+
+
+     <!-- BLOG DETAIL -->
+     <section class="project-detail">
+          <div class="container">
+               <div class="row">
+
+                  <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+
+                    <h2 class="blog-category text-info">Resources / Apparatus Required</h2>
+                    <h4><strong>Hardware:</strong> Basic Desktop with Windows or Linux <br> <strong>Software:</strong> Python / Java</h4>
+
+                    <h2 class="blog-category text-info">Objective</h2>
+                    <h4>To understand Encryption Decryption using DES ciphering method.</h4>
+                </div>
+              </div>
+            </div>
+          </section>
+                <br>
+
+    
+                <section class="project-detail">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+
+                    <h2 class="blog-category text-info">Theory</h2>
+                    <h3>A. DES Method</h3>
+                      <h3>
+                        <strong>Definition:</strong><br><u>Data encryption standard (DES)</u> has been found vulnerable to very powerful attacks and therefore, the popularity of DES has been found slightly on the decline. DES is a block cipher and encrypts data in blocks of size of 64 bits each, which means 64 bits of plain text go as the input to DES, which produces 64 bits of ciphertext. The same algorithm and key are used for encryption and decryption, with minor differences. The key length is 56 bits.
+                        As we know the Data encryption standard (DES) uses 56 bit key to encrypt any plain text which can be easily be cracked by using modern technologies. To prevent this from happening double DES and triple DES were introduced which are much more secured than the original DES because it uses 112 and 168 bit keys respectively. They offer much more security than DES. <br>
+                        <br>
+                        <u>Double DES</u> is a encryption technique which uses two instance of DES on same plain text. In both instances it uses different keys to encrypt the plain text. Both keys are required at the time of decryption. The 64 bit plain text goes into first DES instance which then converted into a 64 bit middle text using the first key and then it goes to second DES instance which gives 64 bit cipher text by using second key.However double DES uses 112 bit key but gives security level of 2^56 not 2^112 and this is because of meet-in-the middle attack which can be used to break through double DES.
+                        <br><br>
+                        <u>Triple DES</u> is a encryption technique which uses three instance of DES on same plain text. It uses there different types of key choosing technique in first all used keys are different and in second two keys are same and one is different and in third all keys are same. Triple DES is also vulnerable to meet-in-the middle attack because of which it give total security level of 2^112 instead of using 168 bit of key. The block collision attack can also be done because of short block size and using same key to encrypt large size of text. It is also vulnerable to sweet32 attac
+                        
+                        <br>
+                                {% comment %} <strong>Formula:</strong><br>
+                                The formula for the Rail Fence Cipher involves writing the plaintext in a zigzag pattern, which can 
+                                be represented as a series of rows. For example, if you are using three rails, the first row will 
+                                contain the first character, the second row will contain the second character, and the third row will
+                                 contain the third character. After writing the plaintext in this manner, you read the ciphertext by 
+                                 combining the characters from each row
+                                    <strong>Advantages:</strong><br> 1. Ease of Use <br>
+                                    2. Customizable Security<br>
+                                    3. Basic Level of Security<br>
+                                <strong>Disadvantages:</strong><br> 1. Limited Application<br>
+                                    2. Low Security<br> {% endcomment %}
+                      </h3>
+                      
+                    </div>
+               </div>
+               <br>
+                  </div></section><br>
+
+
+               
+                <section class="project-detail">
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+               <!-- Video -->
+                        <div class="iframe-container" style="display:flex; justify-content: center;align-items: center;">
+                            <iframe width="920" height="520" src="https://www.youtube.com/embed/j53iXhTSi_s?si=HO0mU7Ttt3O1_3ju" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                            </div></div></div></section><br>
+
+            <!-- Compiler -->
+               <div class="col-lg-30 mx-auto mb-5 pb-5 col-12" data-aos="fade-up">
+                <h3 class="blog-category text-info my-3 justify-content" data-aos="fade-up">Code Your Algorithm</h3>
+                <section>
+                  <iframe src="https://trinket.io/embed/python/fde2f7575a" width="100%" height="600" frameborder="0" marginwidth="0" marginheight="0" allowfullscreen></iframe>
+                </section>
+              </div>
+
+              <section class="project-detail">
+                <div class="container">
+                  <div class="row">
+                    <div class="col-lg-30 mx-auto col-md-11 col-12 my-5 pt-0" data-aos="fade-up">
+                      <h2 class="blog-category text-info">Generate your Experiment PDF</h2>
+                      <h4>Upload the Code and Output Screenshot first, then click on the generate button</h4><br>
+                      <br><br>
+                      <form method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ code_form.as_p }}
+                        {{ image_form.as_p }}
+                        <input type="submit" value="Upload" class="upload-button" id="upload-button">
+                        <a class="upload-button" href="{% url 'generate4' %}">Generate Output</a>
+                      </form>
+          
+                    </div>
+          
+                  </div>
+                </div>
+          
+              </section><br>
+                <br><br>            
+          </div>    
+     </section>
+
+
+
+    <!-- SCRIPTS -->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/js/aos.js"></script>
+    <script src="../static/js/owl.carousel.min.js"></script>
+    <script src="../static/js/smoothscroll.js"></script>
+    <script src="../static/js/custom.js"></script>
+    
+</body>
+</html>
+{% endblock body %}

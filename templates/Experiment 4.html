@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      height: 300px;
+    }
+
+    td,
+    th {
+      border: 2px solid black;
+      padding: 5px;
+    }
+
+    .column1 {
+      width: 30%;
+    }
+
+    .column2 {
+      width: 70%
+    }
+
+    .space-between-tables {
+      margin-top: 20px;
+    }
+  </style>
+
+</head>
+
+<body style="font-family: Calibri; font-size: 18px;">
+
+  <header>
+    <img src="VIT Logo.png" alt="VIT Logo">
+
+    <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>
+
+    <span style="font-weight: bold;">DEPARTMENT OF INFORMATION TECHNOLOGY</span>
+  </header>
+
+  <table>
+    <colgroup>
+      <col class="column1">
+      <col class="column2">
+    </colgroup>
+    <tr>
+      <td>Submission Count</td>
+      <td>
+        {% for submission in submissions %}
+        {{ submission.submission_count }}
+        {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td>Student Name</td>
+      <td>{{user.first_name}} {{user.last_name}}</td>
+    </tr>
+    <tr>
+      <td>Roll Number</td>
+      <td>{{user.username}}</td>
+    </tr>
+    <tr>
+      <td>College Name</td>
+      <td>Vidyalankar Institute of Technology</td>
+    </tr>
+    <tr>
+      <td>Experiment Number</td>
+      <td>04</td>
+    </tr>
+    <tr>
+      <td>Experiment Title</td>
+      <td>{{experiment.title}}</td>
+    </tr>
+    <tr>
+  </table>
+
+  <div class="space-between-tables"></div>
+
+  <table>
+    <colgroup>
+      <col class="column1">
+      <col class="column2">
+    </colgroup>
+    <tr>
+      <td>Aim</td>
+      <td>{{experiment.aim}}</td>
+    </tr>
+    <tr>
+      <td>Theory</td>
+      <td>The Rail Fence Cipher, also known as the Zigzag Cipher, is a simple transposition cipher used for encoding and
+        decoding text.<br>
+        It gets its name from the way it visually resembles a fence made of diagonal rails.<br>
+        This cipher is a type of transposition cipher where the text is written in a zigzag pattern and then read out in
+        rows.<br>
+        It operates by rearranging the letters of a message rather than substituting them with different characters as
+        in substitution ciphers.<br>
+        The Rail Fence Cipher operates with a key parameter known as the number of "rails" or rows.<br>
+        This key determines the number of rows used to write the message in a zigzag pattern.<br>
+        To encode a message, you start by writing the message in a zigzag pattern along the chosen number of rows.<br>
+        Each character in the message is placed in a specific row and column of this "rail fence."<br>
+        As you write the message, you move diagonally from one rail to another in a zigzag pattern.<br>
+        The direction of the diagonal movement alternates between moving down and moving up.<br>
+        To decode the message, you follow a similar process.<br>
+        You create the rail fence structure with the same number of rows, and then you place the encoded characters into
+        the fence in a zigzag pattern.<br>
+        After that, you read the characters diagonally to reveal the original message.</td>
+    </tr>
+    <tr>
+      <td>Code</td>
+      <td>
+        {% if latest_code %}
+        <pre>{{ latest_code.code }}</pre>
+        {% else %}
+        <p>No code available</p>
+        {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Output</td>
+      <td>
+        {% if latest_image %}
+          <img src="{{ latest_image.url }}" alt="Latest Uploaded Image">
+        {% else %}
+        <p>No image uploaded yet.</p>
+          {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>Conclusion</td>
+      <td>{{experiment.conclusion}}</td>
+    </tr>
+    {% if quiz_scores %}
+    <tr>
+      <td> <h5>Score: {{ quiz_scores.score }} </h5> </td>
+      <td>
+        <p>Percentage: {{quiz_scores.percent_correct}}%</p>
+        <p>Time Taken: {{quiz_scores.time_taken}} Seconds</p>
+        <p>Correct answers: {{quiz_scores.correct_answers}}</p>
+        <p>Incorrect answers: {{quiz_scores.wrong_answers}}</p>
+        <p>Total questions: {{quiz_scores.total_questions}}</p>
+      </td>  
+    </tr>
+    {% else %}
+  <p>No quiz scores available.</p>
+  {% endif %}
+  </table>
+</body>
+
+</html>

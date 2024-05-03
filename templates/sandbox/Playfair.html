@@ -1,0 +1,324 @@
+{% extends "base.html" %}
+{% block title %} Playfair Method {% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Playfair Encryption Simulation</title>
+<style>
+    /* CSS styles */
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+        {% comment %} background-image: url('../static/images/bg1.png');
+        filter: blur(5px); /* Adjust the blur radius as needed */
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center; {% endcomment %}
+        height: 200vh; /* Set full viewport height */
+        color: white; /* Set text color to white */
+
+    }
+    .background{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1; /* Place the background behind other content */
+        background-image: url('../static/images/bg1.png');
+        background-size: cover;
+        background-position: center;
+        filter: blur(8px); /* Apply blur effect to the background image */
+    }
+
+    .container {
+        max-width: 1000px; /* Set a wider container width */
+        margin: 50px auto;
+        padding: 20px;
+        background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+    }
+
+    h1 {
+        text-align: center;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        resize: none;
+        overflow: auto;
+        height: auto;
+        border: 1px solid white; /* Set border color to white */
+        border-radius: 5px;
+        color: black; /* Set text color to black within input fields */
+        background-color: white; /* Set background color to white within input fields */
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .output-container {
+        display: flex;
+        flex-direction: column;
+        margin-top: 20px;
+    }
+
+    #explanation,
+    #ciphertext,
+    #decryptedtext {
+        margin-top: 10px;
+    }
+
+    #step-explanation {
+        width: 100%;
+        box-sizing: border-box;
+        overflow: hidden;
+        resize: none;
+        height: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        background-color: white; /* Set background color of table to white */
+        color: black; /* Set text color of table to black */
+    }
+
+    th, td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+    }
+
+    h1 {
+        text-align: center;
+        color: white; /* Set heading color to white */
+    }
+
+    p {
+        color: white; /* Set paragraph text color to white */
+    }
+</style>
+
+</head>
+<body>
+    <div class="background"></div>
+    <div class="container">
+
+<h2>Playfair Encryption Simulation</h2>
+<div>
+    <p>The Playfair cipher uses a 5x5 grid derived from a keyword to encode plaintext.</p>
+    
+    <ul>
+        <li><strong>Playfair Matrix (Key Square):</strong>
+            <ul>
+                <li>Generated from a keyword, excluding duplicate letters and merging 'I' and 'J'.</li>
+                <li>Letters arranged in a 5x5 grid for encryption.</li>
+            </ul>
+        </li>
+        
+        <li><strong>Bigram Processing:</strong>
+            <ul>
+                <li>Plaintext divided into letter pairs (bigrams).</li>
+                <li>Each pair transformed based on specific rules within the Playfair grid.</li>
+            </ul>
+        </li>
+        
+        <li><strong>Decryption:</strong>
+            <p>Reverse process using the same Playfair matrix and rules to decode ciphertext.</p>
+        </li>
+    </ul>
+</div>
+
+<label for="inputText">Enter text to encrypt:</label><br>
+<textarea id="inputText" placeholder="Enter text to encrypt"></textarea><br>
+<label for="keyText">Enter encryption key:</label><br>
+<input type="text" id="keyText" placeholder="Enter encryption key"><br>
+<button onclick="startEncryption()">Encrypt</button>
+<div id="outputText"></div>
+    </div>
+<script>
+function preprocessInput(text) {
+    if (!text) return ''; // Add null check
+    return text.replace(/[^a-zA-Z]/g, "").toUpperCase().replace(/J/g, "I");
+}
+
+function createMatrix(key) {
+    let matrix = [];
+    let alphabet = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
+
+    key = preprocessInput(key);
+    for (let i = 0; i < key.length; i++) {
+        let uppercaseKeyChar = key[i].toUpperCase(); // Convert key character to uppercase
+        if (!matrix.includes(uppercaseKeyChar)) {
+            matrix.push(uppercaseKeyChar);
+            alphabet = alphabet.replace(uppercaseKeyChar, "");
+        }
+    }
+
+    for (let i = 0; i < alphabet.length; i++) {
+        matrix.push(alphabet[i]);
+    }
+
+    return matrix;
+}
+
+function playfairEncrypt(text, key) {
+    let matrix = createMatrix(key);
+    let encryptedText = "";
+    let explanation = "";
+
+    // Function to find position of a character in the matrix
+    function getPosition(char) {
+        let index = matrix.indexOf(char);
+        return { row: Math.floor(index / 5), col: index % 5 };
+    }
+
+    // Function to handle encryption of a pair of characters
+    function encryptPair(char1, char2) {
+        let pos1 = getPosition(char1);
+        let pos2 = getPosition(char2);
+
+        let mappingExplanation = `${char1}(${pos1.row},${pos1.col}) and ${char2}(${pos2.row},${pos2.col}): `;
+
+        if (pos1.row === pos2.row) {
+            // Same row
+            mappingExplanation += `${char1} and ${char2} are in the same row. Encrypt ${char1} to the right of ${char2} and ${char2} to the right of ${char1}.`;
+            encryptedText += matrix[pos1.row * 5 + (pos1.col + 1) % 5];
+            encryptedText += matrix[pos2.row * 5 + (pos2.col + 1) % 5];
+        } else if (pos1.col === pos2.col) {
+            // Same column
+            mappingExplanation += `${char1} and ${char2} are in the same column. Encrypt ${char1} below ${char2} and ${char2} below ${char1}.`;
+            encryptedText += matrix[((pos1.row + 1) % 5) * 5 + pos1.col];
+            encryptedText += matrix[((pos2.row + 1) % 5) * 5 + pos2.col];
+        } else {
+            // Form rectangle and take opposite corners
+            mappingExplanation += `${char1} and ${char2} form a rectangle. Encrypt ${char1} with the letter in the same row as ${char2} and in the same column as ${char1}, and ${char2} with the letter in the same row as ${char1} and in the same column as ${char2}.`;
+            encryptedText += matrix[pos1.row * 5 + pos2.col];
+            encryptedText += matrix[pos2.row * 5 + pos1.col];
+        }
+
+        return mappingExplanation;
+    }
+
+    // Preprocess input text to handle repeated and single characters
+    let preprocessedText = "";
+    for (let i = 0; i < text.length; i++) {
+        preprocessedText += text[i];
+        if (i + 1 < text.length && text[i] === text[i + 1]) {
+            preprocessedText += 'X'; // Add bogus letter
+        }
+    }
+    if (preprocessedText.length % 2 !== 0) {
+        preprocessedText += 'X'; // Add bogus letter for odd-length text
+    }
+
+    // Encrypt pairs of characters
+    let mappingSteps = [];
+    for (let i = 0; i < preprocessedText.length; i += 2) {
+        let mappingExplanation = encryptPair(preprocessedText[i], preprocessedText[i + 1]);
+        mappingSteps.push(mappingExplanation);
+    }
+
+    return { encryptedText, mappingSteps };
+}
+
+function startEncryption() {
+    let inputText = document.getElementById("inputText").value;
+    let key = document.getElementById("keyText").value;
+    let outputDiv = document.getElementById("outputText");
+    outputDiv.innerHTML = '';
+
+    // Preprocess input
+    let preprocessedText = preprocessInput(inputText);
+    let stepDiv = document.createElement("div");
+    stepDiv.classList.add("step");
+    stepDiv.textContent = "Preprocessed Text: " + preprocessedText;
+    outputDiv.appendChild(stepDiv);
+
+    // Create matrix
+    let matrix = createMatrix(key);
+    stepDiv = document.createElement("div");
+    stepDiv.classList.add("step");
+    stepDiv.textContent = "Matrix:";
+    outputDiv.appendChild(stepDiv);
+
+    let matrixDiv = document.createElement("div");
+    matrixDiv.classList.add("matrix");
+    for (let i = 0; i < matrix.length; i += 5) {
+        let row = document.createElement("div");
+        row.classList.add("matrix-row");
+        for (let j = 0; j < 5; j++) {
+            let cell = document.createElement("div");
+            cell.classList.add("matrix-cell");
+            if (key.toUpperCase().includes(matrix[i + j])) { // Compare with uppercase key
+                cell.classList.add("key-highlight");
+            }
+            cell.textContent = matrix[i + j];
+            row.appendChild(cell);
+        }
+        matrixDiv.appendChild(row);
+    }
+    stepDiv.appendChild(matrixDiv);
+
+    // Display mapping steps
+    stepDiv = document.createElement("div");
+    stepDiv.classList.add("step");
+    stepDiv.textContent = "Mapping input text to matrix positions:";
+    outputDiv.appendChild(stepDiv);
+
+    let mappingList = document.createElement("ul");
+
+    // Encrypt text
+    let { encryptedText, mappingSteps } = playfairEncrypt(preprocessedText, key);
+    mappingSteps.forEach(step => {
+        let listItem = document.createElement("li");
+        listItem.textContent = step;
+        mappingList.appendChild(listItem);
+    });
+    stepDiv.appendChild(mappingList);
+
+    // Display encrypted text
+    stepDiv = document.createElement("div");
+    stepDiv.classList.add("step");
+    stepDiv.textContent = "Encrypted Text: " + encryptedText;
+    outputDiv.appendChild(stepDiv);
+}
+</script>
+
+</body>
+</html>
+{% endblock body %}

@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock title %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>User Dashboard</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+  }
+
+  .container {
+    margin-top: 50px;
+  }
+
+  .card-header {
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .card-body {
+    text-align: center;
+  }
+
+  .card-text {
+    font-size: 1.2rem;
+  }
+
+  .experiment-list {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .experiment-list li {
+    margin-bottom: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 mx-auto">
+      {% if user.is_staff %}
+        <h1>Admin Dashboard</h1>
+        <ul class="experiment-list">
+          {% for submission in submissions %}
+            <li>{{ submission.user.username }} has submitted {{submission.experiment_name}} with Submission Count: {{ submission.submission_count }}</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <h1>Welcome, {{ user.username }}</h1>
+
+        <!-- Flashcard for Experiment Count -->
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">Experiments Done</div>
+          <div class="card-body">
+            <h5 class="card-title">{{ experiment_count }}</h5>
+            <p class="card-text">Experiments completed</p>
+          </div>
+        </div>
+
+        <h2>Your Experiments</h2>
+        {% if experiment_count > 0 %}
+          <ul class="experiment-list">
+            {% for experiment_name in experiment_names %}
+              <li>{{ experiment_name }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          <p>You haven't created any experiments yet.</p>
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+{% endblock body %}

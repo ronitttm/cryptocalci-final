@@ -9,6 +9,7 @@ from django.contrib.sessions.models import Session
 from django.conf import settings
 import pyrebase
 from virtuallabs import urls
+import random
 
 firebase_config = settings.FIREBASE_CONFIG
 
@@ -444,7 +445,56 @@ def exp8(request):
     return render(request,"exp8.html")
 
 def exp9(request):
-    return render(request,"exp9.html")
+    if request.method == 'POST':
+        code_form = CodeForm(request.POST)
+        image_form = UserImageForm(request.POST, request.FILES)
+
+        if code_form.is_valid() and image_form.is_valid():
+            user = request.user
+            code = code_form.cleaned_data['code']
+            image = request.FILES['image']
+
+            # Save code to the database
+            Code.objects.create(user=user, code=code)
+
+            # Upload image to cloud storage (Replace this with your actual code to upload to Firebase Storage)
+            filename = image.name  # Assuming you're using the filename as the object name
+            storage.child("images/" + filename).put(image)
+            # Get the download URL of the uploaded image
+            image_url = storage.child("images/" + filename).get_url(None)
+            
+            # Save the image URL into the database
+            image_instance = UploadedImage.objects.create(url=image_url)
+            image_instance.save()
+
+            # Get the experiment
+            experiment = Experiments.objects.get(pk=9)
+
+            submission = ExperimentSubmission.objects.filter(user=user, experiment=experiment).first()
+
+            if submission:
+            # Increment submission count if already submitted
+                submission.submission_count += 1
+                submission.link = image_url  # Update the link with the image URL
+                submission.code = code
+                submission.save()
+            else:
+                # Create a new submission if not already submitted
+                submission = ExperimentSubmission.objects.create(
+                    user=user, 
+                    experiment=experiment,
+                    experiment_name = 'Experiment 9 - Demonstrate SQL Injection using Kali LInux' ,
+                    code = code,
+                    image = image_url,
+                    submission_count=1)
+                submission.save()
+            # Redirect to a success page or perform other actions
+            return redirect('exp9')
+    else:
+        code_form = CodeForm()
+        image_form = UserImageForm()
+
+    return render(request, 'exp9.html', {'code_form': code_form, 'image_form': image_form})
 
 def exp10(request):
     return render(request,"exp10.html")
@@ -508,17 +558,26 @@ def quiz1(request):
             total_questions=total
         )
 
+
         # Redirect to display_image_and_code1 view
         return redirect('generate1')
     else:
         # Render the quiz page
-        questions = QuesModel.objects.filter(experiment_id=1)
-        total = questions.count()  # Calculate total number of questions for experiment_id 1
+        questions = list(QuesModel.objects.filter(experiment_id=1))  # Convert queryset to a list
+        total = len(questions)  # Calculate total number of questions for experiment_id 1
+
+        # Randomize the order of questions every time the page loads
+        random.shuffle(questions)
+
+        # Select any 5 random questions
+        selected_questions = questions[:5]
+
         context = {
-            'questions': questions,
+            'questions': selected_questions,  # Pass the selected questions to the template
             'total': total
         }
         return render(request, 'quiz1.html', context)
+    
     
     
 def quiz2(request):
@@ -558,11 +617,17 @@ def quiz2(request):
         # Redirect to display_image_and_code1 view
         return redirect('generate2')
     else:
-        # Render the quiz page
-        questions = QuesModel.objects.filter(experiment_id=2)
-        total = questions.count()  # Calculate total number of questions for experiment_id 1
+        questions = list(QuesModel.objects.filter(experiment_id=2))  # Convert queryset to a list
+        total = len(questions)  # Calculate total number of questions for experiment_id 1
+
+        # Randomize the order of questions every time the page loads
+        random.shuffle(questions)
+
+        # Select any 5 random questions
+        selected_questions = questions[:5]
+
         context = {
-            'questions': questions,
+            'questions': selected_questions,  # Pass the selected questions to the template
             'total': total
         }
         return render(request, 'quiz2.html', context)
@@ -604,11 +669,17 @@ def quiz3(request):
         # Redirect to display_image_and_code1 view
         return redirect('generate3')
     else:
-        # Render the quiz page
-        questions = QuesModel.objects.filter(experiment_id=3)
-        total = questions.count()  # Calculate total number of questions for experiment_id 1
+        questions = list(QuesModel.objects.filter(experiment_id=3))  # Convert queryset to a list
+        total = len(questions)  # Calculate total number of questions for experiment_id 1
+
+        # Randomize the order of questions every time the page loads
+        random.shuffle(questions)
+
+        # Select any 5 random questions
+        selected_questions = questions[:5]
+
         context = {
-            'questions': questions,
+            'questions': selected_questions,  # Pass the selected questions to the template
             'total': total
         }
         return render(request, 'quiz3.html', context)
@@ -650,11 +721,17 @@ def quiz4(request):
         # Redirect to display_image_and_code1 view
         return redirect('generate4')
     else:
-        # Render the quiz page
-        questions = QuesModel.objects.filter(experiment_id=4)
-        total = questions.count()  # Calculate total number of questions for experiment_id 1
+        questions = list(QuesModel.objects.filter(experiment_id=4))  # Convert queryset to a list
+        total = len(questions)  # Calculate total number of questions for experiment_id 1
+
+        # Randomize the order of questions every time the page loads
+        random.shuffle(questions)
+
+        # Select any 5 random questions
+        selected_questions = questions[:5]
+
         context = {
-            'questions': questions,
+            'questions': selected_questions,  # Pass the selected questions to the template
             'total': total
         }
         return render(request, 'quiz4.html', context)

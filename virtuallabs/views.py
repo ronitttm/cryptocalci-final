@@ -9,6 +9,7 @@ from django.contrib.sessions.models import Session
 from django.conf import settings
 import pyrebase
 from virtuallabs import urls
+import random
 
 firebase_config = settings.FIREBASE_CONFIG
 
@@ -508,17 +509,26 @@ def quiz1(request):
             total_questions=total
         )
 
+
         # Redirect to display_image_and_code1 view
         return redirect('generate1')
     else:
         # Render the quiz page
-        questions = QuesModel.objects.filter(experiment_id=1)
-        total = questions.count()  # Calculate total number of questions for experiment_id 1
+        questions = list(QuesModel.objects.filter(experiment_id=1))  # Convert queryset to a list
+        total = len(questions)  # Calculate total number of questions for experiment_id 1
+
+        # Randomize the order of questions every time the page loads
+        random.shuffle(questions)
+
+        # Select any 5 random questions
+        selected_questions = questions[:5]
+
         context = {
-            'questions': questions,
+            'questions': selected_questions,  # Pass the selected questions to the template
             'total': total
         }
         return render(request, 'quiz1.html', context)
+    
     
     
 def quiz2(request):
@@ -558,11 +568,17 @@ def quiz2(request):
         # Redirect to display_image_and_code1 view
         return redirect('generate2')
     else:
-        # Render the quiz page
-        questions = QuesModel.objects.filter(experiment_id=2)
-        total = questions.count()  # Calculate total number of questions for experiment_id 1
+        questions = list(QuesModel.objects.filter(experiment_id=2))  # Convert queryset to a list
+        total = len(questions)  # Calculate total number of questions for experiment_id 1
+
+        # Randomize the order of questions every time the page loads
+        random.shuffle(questions)
+
+        # Select any 5 random questions
+        selected_questions = questions[:5]
+
         context = {
-            'questions': questions,
+            'questions': selected_questions,  # Pass the selected questions to the template
             'total': total
         }
         return render(request, 'quiz2.html', context)
@@ -604,11 +620,17 @@ def quiz3(request):
         # Redirect to display_image_and_code1 view
         return redirect('generate3')
     else:
-        # Render the quiz page
-        questions = QuesModel.objects.filter(experiment_id=3)
-        total = questions.count()  # Calculate total number of questions for experiment_id 1
+        questions = list(QuesModel.objects.filter(experiment_id=3))  # Convert queryset to a list
+        total = len(questions)  # Calculate total number of questions for experiment_id 1
+
+        # Randomize the order of questions every time the page loads
+        random.shuffle(questions)
+
+        # Select any 5 random questions
+        selected_questions = questions[:5]
+
         context = {
-            'questions': questions,
+            'questions': selected_questions,  # Pass the selected questions to the template
             'total': total
         }
         return render(request, 'quiz3.html', context)
@@ -650,11 +672,17 @@ def quiz4(request):
         # Redirect to display_image_and_code1 view
         return redirect('generate4')
     else:
-        # Render the quiz page
-        questions = QuesModel.objects.filter(experiment_id=4)
-        total = questions.count()  # Calculate total number of questions for experiment_id 1
+        questions = list(QuesModel.objects.filter(experiment_id=4))  # Convert queryset to a list
+        total = len(questions)  # Calculate total number of questions for experiment_id 1
+
+        # Randomize the order of questions every time the page loads
+        random.shuffle(questions)
+
+        # Select any 5 random questions
+        selected_questions = questions[:5]
+
         context = {
-            'questions': questions,
+            'questions': selected_questions,  # Pass the selected questions to the template
             'total': total
         }
         return render(request, 'quiz4.html', context)

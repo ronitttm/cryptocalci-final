@@ -13,16 +13,6 @@
 
 </head>
 <body>
-	<div class="menu">
-		<div class="title">MENU</div>
-		<ul class="nav">
-		  <li><a href="/index.html">Home</a></li>
-		  <li><a href="/route/main1.html">Algorithms</a></li>
-		  <li><a href="#">About</a></li>
-		  <li><a href="/route/main2.html">Services</a></li>
-		  <li><a href="#">Contact</a></li>
-		</ul>
-	</div>
 <!-- partial:index.partial.html -->
 		<section class="tabs">
 			<div class="container">
@@ -34,10 +24,10 @@
 					<img src="static\images\blocksy.png"width="50"height="50"></i>
 					<p class="hide-sm">Symmetric-Block</p>
 				</div>
-				<div id="tab-2" class="tab-item">
+				{% comment %} <div id="tab-2" class="tab-item">
 					<img src="static\images\asymic1.png"width="50"height="50"></i>
 					<p class="hide-sm">Asymmetric</p>
-				</div>
+				</div> {% endcomment %}
 				<div id="tab-3" class="tab-item">
 					<img src="static\images\hashic1.png"width="50"height="50"></i>
 					<p class="hide-sm">Hashing</p>
@@ -142,7 +132,7 @@
 			</div>
 
 				<!-- Tab Content 2 -->
-				<div id="tab-2-content" class="tab-content-item">
+				{% comment %} <div id="tab-2-content" class="tab-content-item">
 					<div class="tab-2-content-top">
 
 						<div class="work">
@@ -162,7 +152,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> {% endcomment %}
 
 				<!-- Tab Content 3 -->
 				<div id="tab-3-content" class="tab-content-item">

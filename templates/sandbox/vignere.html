@@ -285,6 +285,7 @@
             }
 
             document.getElementById("step-explanation").value = stepByStep;
+            adjustTextareaHeight("step-explanation");
             document.getElementById("ciphertext").value = ciphertext;
         }
 
@@ -314,7 +315,13 @@
             }
 
             document.getElementById("step-explanation").value = stepByStep;
+            adjustTextareaHeight("step-explanation");
             document.getElementById("decryptedtext").value = decryptedText;
+        }
+        function adjustTextareaHeight(id) {
+            var textarea = document.getElementById(id);
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
         }
     </script>
 </body>

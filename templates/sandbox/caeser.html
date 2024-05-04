@@ -306,6 +306,11 @@
             document.getElementById("step-explanation").value = stepByStep;
             document.getElementById("decryptedtext").value = decryptedText;
         }
+        function adjustTextareaHeight(id) {
+            var textarea = document.getElementById(id);
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
+        }
     </script>
 </body>
 </html>

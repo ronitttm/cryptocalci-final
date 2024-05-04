@@ -219,6 +219,7 @@
             }
             // Display step-by-step explanation
             document.getElementById("step-explanation").value = stepByStep;
+            adjustTextareaHeight("step-explanation");
             // Display ciphertext
             document.getElementById("ciphertext").value = ciphertext;
         }
@@ -273,6 +274,8 @@
             }
             // Display step-by-step explanation
             document.getElementById("step-explanation").value = stepByStep;
+            adjustTextareaHeight("step-explanation");
+            
             // Display decrypted text
             document.getElementById("decipheredtext").value = decryptedtext;
         }
@@ -295,6 +298,12 @@
                 }
             }
             return null; // Inverse does not exist
+        }
+
+        function adjustTextareaHeight(id) {
+            var textarea = document.getElementById(id);
+            textarea.style.height = "auto";
+            textarea.style.height = textarea.scrollHeight + "px";
         }
     </script>
 </body>

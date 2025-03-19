@@ -737,7 +737,7 @@ def rc4(request):
 
 
 def rsa(request):
-    return render(request,"sandbox/rsa.html")
+    return render(request,"sandbox/rsa1.html")
 
 
 def elgamal(request):

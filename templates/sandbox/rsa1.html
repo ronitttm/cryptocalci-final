@@ -1,0 +1,319 @@
+{% extends "base.html" %}
+{% block title %} RSA Method {% endblock title %}
+{% block body %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Encryption and Decryption</title>
+    <style>
+        /* CSS styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            {% comment %} background-image: url('../static/images/bg1.png');
+            filter: blur(5px); /* Adjust the blur radius as needed */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-position: center; {% endcomment %}
+            height: 200vh; /* Set full viewport height */
+            color: white; /* Set text color to white */
+    
+        }
+        .background{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Place the background behind other content */
+            background-image: url('../static/images/bg1.png');
+            background-size: cover;
+            background-position: center;
+            filter: blur(8px); /* Apply blur effect to the background image */
+        }
+    
+        .container {
+            max-width: 1000px; /* Set a wider container width */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+        }
+    
+        h1 {
+            text-align: center;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    
+        input[type="text"],
+        input[type="number"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            resize: none;
+            overflow: auto;
+            height: auto;
+            border: 1px solid white; /* Set border color to white */
+            border-radius: 5px;
+            color: black; /* Set text color to black within input fields */
+            background-color: white; /* Set background color to white within input fields */
+        }
+    
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+    
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    
+        button:hover {
+            background-color: #0056b3;
+        }
+    
+        .output-container {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+    
+        #explanation,
+        #ciphertext,
+        #decryptedtext {
+            margin-top: 10px;
+        }
+    
+        #step-explanation {
+            width: 100%;
+            box-sizing: border-box;
+            overflow: hidden;
+            resize: none;
+            height: auto;
+        }
+    
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            background-color: white; /* Set background color of table to white */
+            color: black; /* Set text color of table to black */
+        }
+    
+        th, td {
+            border: 1px solid #ccc;
+            padding: 8px;
+            text-align: center;
+        }
+    
+        h1 {
+            text-align: center;
+            color: white; /* Set heading color to white */
+        }
+    
+        p {
+            color: white; /* Set paragraph text color to white */
+        }
+        .step {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        .matrix {
+            margin-bottom: 10px;
+        }
+        .matrix-row {
+            display: flex;
+            justify-content: space-between;
+        }
+        .matrix-cell {
+            border: 1px solid #ccc;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .key-highlight {
+            background-color: yellow;}
+    </style>
+</head>
+<body>
+    <div class="background"></div>
+
+    <div class="container">
+        <h1>RSA Encryption and Decryption</h1>
+        <p>RSA is a public-key cryptosystem that is widely used for secure data transmission.</p>
+        <p>Let's go through the RSA encryption and decryption process step by step.</p>
+        
+        <div>
+            <label for="input-plaintext">Input Plain Text for Encryption:</label>
+            <input type="text" id="input-plaintext" placeholder="Enter plaintext...">
+        </div>
+        <div>
+            <label for="input-ciphertext">Input Cipher Text for Decryption:</label>
+            <input type="text" id="input-ciphertext" placeholder="Enter ciphertext...">
+        </div>
+        <div>
+            <label for="p">Prime Number P:</label>
+            <input type="number" id="p">
+        </div>
+        <div>
+            <label for="q">Prime Number Q:</label>
+            <input type="number" id="q">
+        </div>
+        <div>
+            <button onclick="generateKeys()">Generate Keys</button>
+            <button onclick="encrypt()">Encrypt</button>
+            <button onclick="decrypt()">Decrypt</button>
+        </div>
+        <div class="output-container">
+            <div id="explanation">
+                <label for="step-explanation">Step-by-step explanation:</label>
+                <textarea id="step-explanation" readonly></textarea>
+            </div>
+            <div id="keys">
+                <label for="generated-keys">Generated Keys:</label>
+                <textarea id="generated-keys" readonly></textarea>
+            </div>
+            <div id="output-container">
+                <label id="output-ciphertext-label" for="output-ciphertext">Output Cipher Text:</label>
+                <textarea id="output-ciphertext" readonly></textarea>
+                <button id="copy-button" onclick="copyOutputToInput()">Copy to Input Cipher Text</button>
+                <label for="decrypted-output">Decrypted Output (Ciphertext^d mod n):</label>
+                <textarea id="decrypted-output" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript code
+        var p, q, n, e, d;
+
+        function modInverse(a, m) {
+            // Calculate modular inverse using extended Euclidean algorithm
+            var m0 = m;
+            var x0 = BigInt(0);
+            var x1 = BigInt(1);
+
+            while (a > 1) {
+                var q = a / m;
+                var t = m;
+                m = a % m;
+                a = t;
+                t = x0;
+                x0 = x1 - q * x0;
+                x1 = t;
+            }
+
+            if (x1 < 0) {
+                x1 += m0;
+            }
+
+            return x1;
+        }
+
+        function generateKeys() {
+            p = BigInt(document.getElementById("p").value);
+            q = BigInt(document.getElementById("q").value);
+            n = p * q;
+            var phi = (p - BigInt(1)) * (q - BigInt(1));
+            e = BigInt(3); // We choose a small exponent for simplicity
+            d = modInverse(e, phi); // Calculate modular inverse
+
+            var explanation = "Step 1: Calculate n\n";
+            explanation += "   n = p * q = " + n + "\n\n";
+            explanation += "Step 2: Calculate φ(n)\n";
+            explanation += "   φ(n) = (p - 1) * (q - 1) = " + phi + "\n\n";
+            explanation += "Step 3: Choose e\n";
+            explanation += "   We choose a small exponent e = " + e + "\n\n";
+            explanation += "Step 4: Calculate d\n";
+            explanation += "   Calculate modular inverse of e mod φ(n):\n";
+            explanation += "   d = modInverse(e, φ(n)) = " + d + "\n\n";
+
+            document.getElementById("step-explanation").value = explanation;
+
+            // Display generated keys
+            var keysInfo = "Public Key (n, e): (" + n + ", " + e + ")\n";
+            keysInfo += "Private Key d: " + d + "\n";
+            document.getElementById("generated-keys").value = keysInfo;
+        }
+
+        function encrypt() {
+            // Clear previous step-by-step explanation
+            document.getElementById("step-explanation").value = "";
+
+            var plaintext = document.getElementById("input-plaintext").value;
+
+            // Convert each character of the plaintext to its ASCII value, concatenate them, and convert to BigInt
+            var plaintextAscii = "";
+            for (var i = 0; i < plaintext.length; i++) {
+                var asciiValue = plaintext.charCodeAt(i).toString();
+                if (asciiValue.length < 3) {
+                    // Pad ASCII value with leading zeros if necessary
+                    asciiValue = "0".repeat(3 - asciiValue.length) + asciiValue;
+                }
+                plaintextAscii += asciiValue;
+            }
+            var M = BigInt(plaintextAscii);
+
+            // Encrypt the plaintext number
+            var encryptedPlaintextNum = M ** e % n;
+
+            // Display the encrypted data
+            document.getElementById("output-ciphertext").value = encryptedPlaintextNum.toString();
+
+            // Include encryption step in the explanation
+            var stepExplanation = "";
+            stepExplanation += "Step 5: Encrypt the plaintext\n";
+            stepExplanation += "   Convert plaintext to ASCII and concatenate: ";
+            stepExplanation += plaintextAscii + "\n";
+            stepExplanation += "   Ciphered Text = Plaintext^e mod n\n";
+            stepExplanation += "   Ciphered Text = " + plaintextAscii + "^" + e + " mod " + n + " = " + encryptedPlaintextNum + "\n\n";
+            document.getElementById("step-explanation").value = stepExplanation;
+        }
+
+        function decrypt() {
+            // Clear previous step-by-step explanation
+            document.getElementById("step-explanation").value = "";
+
+            var ciphertext = BigInt(document.getElementById("input-ciphertext").value);
+            
+            // Decrypt the ciphertext number
+            var decryptedCiphertextNum = ciphertext ** d % n;
+
+            // Display the decrypted number
+            document.getElementById("decrypted-output").value = decryptedCiphertextNum.toString();
+
+            // Include decryption step in the explanation
+            var stepExplanation = "";
+            stepExplanation += "Step 5: Decrypt the ciphertext\n";
+            stepExplanation += "   Deciphered Text = Ciphertext^d mod n\n";
+            stepExplanation += "   Deciphered Text = " + ciphertext + "^" + d + " mod " + n + " = " + decryptedCiphertextNum + "\n\n";
+            document.getElementById("step-explanation").value = stepExplanation;
+        }
+
+        function copyOutputToInput() {
+            var outputCiphertext = document.getElementById("output-ciphertext").value;
+            document.getElementById("input-ciphertext").value = outputCiphertext;
+        }
+    </script>
+</body>
+</html>
+{% endblock body %}
